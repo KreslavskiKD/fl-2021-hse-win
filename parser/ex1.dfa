@@ -1,0 +1,36 @@
+
+def alphabet1: Alphabet<Char> = {'a', 'b'}
+
+def automatonFor2: Automaton = 
+	Automaton.setAplhabet(alphabet1)
+		.describe {
+			start	'a' -> a1b0
+				'b' -> a0b1
+			a1b0	'a' -> a2b0
+				'b' -> a1b1
+			a2b0	'a' -> a3b0
+				'b' -> a2b1
+			a0b1	'a' -> a1b1
+				'b' -> a0b2
+			a0b2	'a' -> a1b2
+				'b' -> deadend
+			a1b1	'a' -> a2b1
+				'b' -> a1b2
+			a2b1 	'a' -> a3b1
+				'b' -> a2b2
+			a1b2	'a' -> a2b2
+				'b' -> deadend
+			a2b2	'a' -> a3b2
+				'b' -> deadend
+
+
+			terminal {
+				a3b0	'a' -> itself
+					'b' -> a3b1
+				a3b1	'a' -> itself
+					'b' -> a3b2
+				a3b2 	'a' -> itself
+					'b' -> deadend
+			}
+
+		}

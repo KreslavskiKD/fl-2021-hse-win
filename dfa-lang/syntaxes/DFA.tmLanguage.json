@@ -1,0 +1,41 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "DFA",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#bodyKeywords"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.DFA",
+				"match": "\\b(def|class|override|fun|return)\\b"
+			}]
+		},
+		"bodyKeywords": {
+			"patterns": [{
+				"name": "keyword.letter.DFA",
+				"match": "\\b(start|else|deadend|alphabet|terminal|from)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.DFA",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.DFA",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.dfa"
+}

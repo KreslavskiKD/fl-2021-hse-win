@@ -1,0 +1,25 @@
+{
+    "name": "dfa-lang",
+    "displayName": "DFA Lang",
+    "description": "Syntax highlighting for DFA Lang",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "DFA",
+            "aliases": ["DFA", "DFA"],
+            "extensions": [".dfa"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "DFA",
+            "scopeName": "source.dfa",
+            "path": "./syntaxes/DFA.tmLanguage.json"
+        }]
+    }
+}

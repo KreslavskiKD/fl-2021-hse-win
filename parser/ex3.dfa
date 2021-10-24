@@ -1,0 +1,51 @@
+
+class PairSymb(a: String, b: Int = 1) : Symbol {
+	override fun equals(ps: PairSymb) : Boolean {
+		return (a == ps.a && b == ps.b)
+	}
+}
+
+def alphabetIntValence: Alphabet<Int> = Int.inRange(1, 8)
+
+def alphabetStringChemicalElements: Alphabet<String> = {"H", "He",
+	"Li", "Be", "B", "C", "N", "O", "F", "Ne",
+	"Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar",
+	"K", "Ca", "Sc", "Ti", "V", "Cr", "Mn" ,"Fe" ,"Co" ,"Ni",
+	"Cu", "Zn" ,"Ga", "Ge", "As", "Se", "Br", "Kr",
+	"Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Te" ,"Ru" ,"Rh" ,"Pd",
+	"Ag", "Cd" ,"In", "Sn", "Sb", "Te", "I", "Xe",
+	"Cs", "Ba", "La", "Hf", "Ta", "W", "Re" ,"Os" ,"Ir" ,"Pt",
+	"Au", "Hg" ,"Tl", "Pb", "Bi", "Po", "At", "Rn",
+	"Fr", "Ra", "Ac", "Rf", "Db", "Sg", "Bh" ,"Hs" ,"Mt" ,"Ds",
+	"Rg", "Cn" ,"Nh", "Fl", "Mc", "Lv", "Ts", "Og",
+	"Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd" ,"Tb" ,"Dy" ,"Ho", "Er" ,"Tm" ,"Yd" ,"Lu",
+	"Th", "Pa", "U", "Np", "Pu", "Am", "Cm" ,"Bk" ,"Cf" ,"Es", "Fm" ,"Md" ,"No" ,"Lr"
+}
+
+def myAlphabet: Alphabet<PairSymb> = Alphabet.describe {
+	a from alphabetStringChemicalElements,
+	b from alphabetIntValence
+}
+
+def chemistryAutomaton: Automaton = 
+	Automaton.setAlphabet(myAlphabet)
+		.describe {
+			start	PairSymb("C", 2) -> state_c2
+				else -> deadend
+
+			state_c2	PairSymb("H", 4) -> ethene
+					PairSymb("H", 5) -> tmp1
+					else -> deadend
+
+			tmp1	PairSymb("O") -> tmp2
+				else -> deadend
+
+			tmp2	PairSymb("H", 1) -> ethanol
+				else -> deadend
+			
+			terminal {
+				ethene	alphabet -> deadend
+				ethanol alphabet -> deadend
+			}
+
+		}
