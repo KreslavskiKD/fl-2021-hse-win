@@ -19,9 +19,9 @@ class StateKind(enum.Enum):
 
 
 kind_to_string = {
-    0: "regular",
-    1: "start",
-    2: "terminal"
+    StateKind.regular: "regular",
+    StateKind.start: "start",
+    StateKind.terminal: "terminal"
 }
 
 
@@ -49,7 +49,7 @@ class Transition:
         self.symbol_by = symbol_by
         self.state_to = state_to
 
-    def __str__(self):
+    def __repr__(self):
         return str(
             self.symbol_by.__str__() +
             " -> " +
@@ -71,9 +71,15 @@ class AutomatonState:
         result_str = ""
         for t in self.transitions:
             result_str += tabs_str
-            result_str += t.__str__()
+            result_str += t.__repr__()
 
-        return tabs_str + "Name: " + self.name.__str__() + "; Type: " + kind_to_string[self.kind] + "\n" + result_str
+        return str(
+            tabs_str + "Name: " + self.name.__str__() +
+            "; Type: " + kind_to_string[self.kind] + "\n" + result_str + "\n"
+        )
+
+    def __repr__(self):
+        return self.display(2)
 
 
 class Automaton:
@@ -138,18 +144,15 @@ class Variable:
         self.vartype = vartype
         self.constructor_params = constructor_params
 
-    def add_param(self, param):
-        self.constructor_params.append(param)
-
     def __repr__(self):
         params_str = ""
         for par in self.constructor_params:
-            params_str += "; "
             params_str += par.__str__()
+            params_str += "; "
 
         return str(
             "Variable:\tvartype:" +
-            self.vartype.__str__() + "\tconstructor_params:\n" +
+            self.vartype.__str__() + "\tconstructor_params:\t" +
             params_str
         )
 
@@ -321,7 +324,7 @@ def p_alphabetdescribebody(p):
         p[0] = [p[1]]
     else:
         if len(p) == 4:
-            p[0] = [p[1]] + p[2]
+            p[0] = [p[1]] + p[3]
 
 
 def p_paramsdescribe(p):
@@ -336,7 +339,7 @@ def p_transitionterm(p):
                       | CLASSNAME PARSTART enumeration PAREND
                       '''
     if len(p) == 2:
-        p[0] = Variable(type(p[1]).__name__, p[1])
+        p[0] = p[1]
     else:
         if len(p) == 5:
             p[0] = Variable(p[1], p[3])
@@ -351,10 +354,21 @@ def p_transitionkeyword(p):
     p[0] = p[1]
 
 
+def p_transitionlist(p):
+    '''transitionlist : transitionterm
+                      | transitionkeyword
+                      | transitionterm COMMA transitionlist
+                      | transitionkeyword COMMA transitionlist
+                      '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
+
+
 def p_transition(p):
-    '''transition : transitionterm ARROW ID
-                  | transitionkeyword ARROW ID
-                  | transitionkeyword ARROW transitionkeyword
+    '''transition : transitionlist ARROW ID
+                  | transitionlist ARROW transitionkeyword
                   '''
     p[0] = Transition(p[1], p[3])
 
@@ -362,11 +376,15 @@ def p_transition(p):
 def p_automaton(p):
     'automaton : DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND'
     p[0] = Automaton(p[2], p[9], p[13])
+    # print("automaton\n")
+    # print(p[2])
 
 
 def p_automatondescribebody(p):
     'automatondescribebody : START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND'
     p[0] = AutomatonBody(AutomatonState(name="start", kind=StateKind.start, transitions=p[2]), p[3], p[6])
+    # print("automatone describe body\n")
+    # print(p[0])
 
 
 def p_statedescription(p):
@@ -378,6 +396,8 @@ def p_statedescription(p):
     else:
         if len(p) == 2:
             p[0] = [p[1]]
+    # print("statedescription\n")
+    # print(p[0])
 
 
 def p_states(p):
@@ -392,6 +412,8 @@ def p_states(p):
             p[0] = [AutomatonState(name=p[1], kind=StateKind.regular, transitions=p[2])]
         else:
             p[0] = []
+    # print("states\n")
+    # print(p[0])
 
 
 def p_termstates(p):
@@ -440,7 +462,7 @@ def p_classbody(p):
     if len(p) == 2:
         p[0] = [p[1]]
     else:
-        p[0] = p[2].insert(0, p[1])
+        p[0] = [p[1]] + p[2]
 
 
 def p_method(p):

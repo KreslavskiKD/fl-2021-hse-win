@@ -1,0 +1,58 @@
+[ClassDefinition:
+	class_name: PairSymb
+	inherited_from: Symbol
+	params: 
+		{name: a ; field_type: String ; default_value: None }
+		{name: b ; field_type: Int ; default_value: 1 }
+	methods:
+	ClassMethod:
+		name: equals
+		fields: 
+			{name: ps ; field_type: PairSymb ; default_value: None }
+		return_type: Boolean
+		operations: 
+			{left: {belongs_to: this ; field_name: .a } ; operator: == ; right: {belongs_to: ps ; field_name: .a } }
+			&&
+			(
+			{left: {belongs_to: this ; field_name: .b } ; operator: == ; right: {belongs_to: ps ; field_name: .b } }
+			)
+, Alphabet:
+	name: alphabetIntValence
+	constructor_type: ConstructorType.strict
+	constructor_params:
+		1		8
+, Alphabet:
+	name: alphabetStringChemicalElements
+	constructor_type: ConstructorType.enumeration
+	constructor_params:
+		'"H"'		'"He"'		'"Li"'		'"Be"'		'"B"'		'"C"'		'"N"'		'"O"'		'"F"'		'"Ne"'		'"Na"'		'"Mg"'		'"Al"'		'"Si"'		'"P"'		'"S"'		'"Cl"'		'"Ar"'		'"K"'		'"Ca"'		'"Sc"'		'"Ti"'		'"V"'		'"Cr"'		'"Mn"'		'"Fe"'		'"Co"'		'"Ni"'		'"Cu"'		'"Zn"'		'"Ga"'		'"Ge"'		'"As"'		'"Se"'		'"Br"'		'"Kr"'		'"Rb"'		'"Sr"'		'"Y"'		'"Zr"'		'"Nb"'		'"Mo"'		'"Te"'		'"Ru"'		'"Rh"'		'"Pd"'		'"Ag"'		'"Cd"'		'"In"'		'"Sn"'		'"Sb"'		'"Te"'		'"I"'		'"Xe"'		'"Cs"'		'"Ba"'		'"La"'		'"Hf"'		'"Ta"'		'"W"'		'"Re"'		'"Os"'		'"Ir"'		'"Pt"'		'"Au"'		'"Hg"'		'"Tl"'		'"Pb"'		'"Bi"'		'"Po"'		'"At"'		'"Rn"'		'"Fr"'		'"Ra"'		'"Ac"'		'"Rf"'		'"Db"'		'"Sg"'		'"Bh"'		'"Hs"'		'"Mt"'		'"Ds"'		'"Rg"'		'"Cn"'		'"Nh"'		'"Fl"'		'"Mc"'		'"Lv"'		'"Ts"'		'"Og"'		'"Ce"'		'"Pr"'		'"Nd"'		'"Pm"'		'"Sm"'		'"Eu"'		'"Gd"'		'"Tb"'		'"Dy"'		'"Ho"'		'"Er"'		'"Tm"'		'"Yd"'		'"Lu"'		'"Th"'		'"Pa"'		'"U"'		'"Np"'		'"Pu"'		'"Am"'		'"Cm"'		'"Bk"'		'"Cf"'		'"Es"'		'"Fm"'		'"Md"'		'"No"'		'"Lr"'
+, Alphabet:
+	name: myAlphabet
+	constructor_type: ConstructorType.describe
+	constructor_params:
+		(['a'], 'alphabetStringChemicalElements')		(['b'], 'alphabetIntValence')
+, Automaton:
+	name: chemistryAutomaton
+	alphabet_name: myAlphabet
+	start_state: 		Name: start; Type: start
+		[Variable:	vartype:PairSymb	constructor_params:	"C"; 2; ] -> state_c2		['else'] -> deadend
+regular_states:
+---
+		Name: state_c2; Type: regular
+		[Variable:	vartype:PairSymb	constructor_params:	"H"; 4; ] -> ethene		[Variable:	vartype:PairSymb	constructor_params:	"H"; 5; ] -> tmp1		['else'] -> deadend
+---
+		Name: tmp1; Type: regular
+		[Variable:	vartype:PairSymb	constructor_params:	"O"; ] -> tmp2		['else'] -> deadend
+---
+		Name: tmp2; Type: regular
+		[Variable:	vartype:PairSymb	constructor_params:	"H"; 1; ] -> ethanol		['else'] -> deadend
+
+	terminal_states:
+---
+		Name: ethene; Type: terminal
+		['alphabet'] -> deadend
+---
+		Name: ethanol; Type: terminal
+		['alphabet'] -> deadend
+
+]

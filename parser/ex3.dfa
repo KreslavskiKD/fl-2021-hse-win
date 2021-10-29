@@ -1,7 +1,6 @@
-
 class PairSymb(a: String, b: Int = 1) : Symbol {
 	override fun equals(ps: PairSymb) : Boolean {
-		return (a == ps.a && b == ps.b)
+		return (this.a == ps.a && (this.b == ps.b))
 	}
 }
 

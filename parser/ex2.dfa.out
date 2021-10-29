@@ -1,0 +1,33 @@
+[Alphabet:
+	name: aplhabet1
+	constructor_type: ConstructorType.enumeration
+	constructor_params:
+		0		1		2		3		4		5		6		7		8		9
+, Automaton:
+	name: automatonFor1
+	alphabet_name: alphabet1
+	start_state: 		Name: start; Type: start
+		[0] -> leadingZero		[5] -> s0		[1, 6] -> s1		[2, 7] -> s2		[3, 8] -> s3		[4, 9] -> s4
+regular_states:
+---
+		Name: s1; Type: regular
+		[1, 6] -> s2		[2, 7] -> s3		[3, 8] -> s4		[4, 9] -> s0		['else'] -> itself
+---
+		Name: s2; Type: regular
+		[1, 6] -> s3		[2, 7] -> s4		[3, 8] -> s0		[4, 9] -> s1		['else'] -> itself
+---
+		Name: s3; Type: regular
+		[1, 6] -> s4		[2, 7] -> s0		[3, 8] -> s1		[4, 9] -> s2		['else'] -> itself
+---
+		Name: s4; Type: regular
+		[1, 6] -> s0		[2, 7] -> s1		[3, 8] -> s2		[4, 9] -> s3		['else'] -> itself
+
+	terminal_states:
+---
+		Name: leadingZero; Type: terminal
+		['alphabet'] -> deadend
+---
+		Name: s0; Type: terminal
+		[1, 6] -> s1		[2, 7] -> s2		[3, 8] -> s3		[4, 9] -> s4		['else'] -> itself
+
+]

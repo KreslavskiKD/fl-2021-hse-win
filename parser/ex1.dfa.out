@@ -1,2 +1,48 @@
-Syntax error
-None
+[Alphabet:
+	name: alphabet1
+	constructor_type: ConstructorType.enumeration
+	constructor_params:
+		'a'		'b'
+, Automaton:
+	name: automatonFor2
+	alphabet_name: alphabet1
+	start_state: 		Name: start; Type: start
+		['a'] -> a1b0		['b'] -> a0b1
+regular_states:
+---
+		Name: a1b0; Type: regular
+		['a'] -> a2b0		['b'] -> a1b1
+---
+		Name: a2b0; Type: regular
+		['a'] -> a3b0		['b'] -> a2b1
+---
+		Name: a0b1; Type: regular
+		['a'] -> a1b1		['b'] -> a0b2
+---
+		Name: a0b2; Type: regular
+		['a'] -> a1b2		['b'] -> deadend
+---
+		Name: a1b1; Type: regular
+		['a'] -> a2b1		['b'] -> a1b2
+---
+		Name: a2b1; Type: regular
+		['a'] -> a3b1		['b'] -> a2b2
+---
+		Name: a1b2; Type: regular
+		['a'] -> a2b2		['b'] -> deadend
+---
+		Name: a2b2; Type: regular
+		['a'] -> a3b2		['b'] -> deadend
+
+	terminal_states:
+---
+		Name: a3b0; Type: terminal
+		['a'] -> itself		['b'] -> a3b1
+---
+		Name: a3b1; Type: terminal
+		['a'] -> itself		['b'] -> a3b2
+---
+		Name: a3b2; Type: terminal
+		['a'] -> itself		['b'] -> deadend
+
+]
