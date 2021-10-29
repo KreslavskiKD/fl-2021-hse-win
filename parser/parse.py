@@ -33,6 +33,8 @@ class ProgramScope:
         expr_str = ""
         for eee in self.expressions:
             expr_str += eee.__repr__()
+            expr_str += "\n\n"
+
         return expr_str
 
 
@@ -97,7 +99,7 @@ class Automaton:
             self.alphabet_name.__str__() + "\n\tstart_state: " +
             self.body.start_state.display(2) + "regular_states:\n" +
             states_str + "\n\tterminal_states:\n" +
-            term_states_str
+            term_states_str + "\n"
         )
 
 
@@ -127,7 +129,7 @@ class Alphabet:
             "Alphabet:\n\tname: " +
             self.name.__str__() + "\n\tconstructor_type: " +
             self.constructor_type.__str__() + "\n\tconstructor_params:\n" +
-            params_str
+            params_str + "\n"
         )
 
 
@@ -173,7 +175,7 @@ class ClassDefinition:
             "ClassDefinition:\n\tclass_name: " + self.class_name.__str__() +
             "\n\tinherited_from: " + self.inherited_from.__str__() +
             "\n\tparams: " + params_str +
-            "\n\tmethods:\n" + methods_str
+            "\n\tmethods:\n" + methods_str + "\n"
         )
 
 
@@ -250,7 +252,7 @@ def p_expressions(p):
         p[0] = [p[1]]
     else:
         if len(p) == 3:
-            p[0] = p[2].insert(0, p[1])
+            p[0] = [p[1]] + p[2]
 
 
 def p_expression(p):
@@ -319,7 +321,7 @@ def p_alphabetdescribebody(p):
         p[0] = [p[1]]
     else:
         if len(p) == 4:
-            p[0] = [p[1]].append(p[2])
+            p[0] = [p[1]] + p[2]
 
 
 def p_paramsdescribe(p):
@@ -372,7 +374,7 @@ def p_statedescription(p):
                         | transition
                         '''
     if len(p) == 3:
-        p[0] = p[2].insert(0, p[1])
+        p[0] = [p[1]] + p[2]
     else:
         if len(p) == 2:
             p[0] = [p[1]]
@@ -384,7 +386,7 @@ def p_states(p):
               | empty
               '''
     if len(p) == 4:
-        p[0] = p[1].append(AutomatonState(name=p[2], kind=StateKind.regular, transitions=p[3]))
+        p[0] = p[1] + [(AutomatonState(name=p[2], kind=StateKind.regular, transitions=p[3]))]
     else:
         if len(p) == 3:
             p[0] = [AutomatonState(name=p[1], kind=StateKind.regular, transitions=p[2])]
@@ -398,7 +400,7 @@ def p_termstates(p):
                   | empty
                   '''
     if len(p) == 4:
-        p[0] = p[1].append(AutomatonState(name=p[2], kind=StateKind.terminal, transitions=p[3]))
+        p[0] = p[1] + [(AutomatonState(name=p[2], kind=StateKind.terminal, transitions=p[3]))]
     else:
         if len(p) == 3:
             p[0] = [AutomatonState(name=p[1], kind=StateKind.terminal, transitions=p[2])]
@@ -425,6 +427,10 @@ def p_fields(p):
     '''fields : field
               | field COMMA fields
               '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
 
 
 def p_classbody(p):
@@ -456,10 +462,10 @@ def p_logicoperations(p):
         p[0] = [p[1]]
     else:
         if len(p) == 4:
-            p[0] = (p[2].insert(0, p[1])).append(p[3])
+            p[0] = [p[1]] + p[2] + [p[3]]
         else:
             if len(p) == 6:
-                p[0] = p[1].append([p[2], p[3], p[4], p[5]])
+                p[0] = p[1] + [p[2], p[3], p[4], p[5]]
 
 
 # Set up a logging object
@@ -479,16 +485,5 @@ parser = yacc.yacc(debug=True, debuglog=log)
 sys.stdin = open(sys.argv[1], 'r')
 sys.stdout = open(sys.argv[1] + '.out', 'w')
 
-while True:
-    try:
-        s = input()
-    except EOFError:
-        break
-    if not s:
-        continue
-    # try:
-    result = parser.parse(s)
-    print(result.__str__())
-    # except Exception as e:
-    #     print("Error: " + str(e))
-    break
+result = parser.parse(sys.stdin.read())
+print(result.__str__())
