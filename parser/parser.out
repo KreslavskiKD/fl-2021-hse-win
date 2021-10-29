@@ -2,1602 +2,1579 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Grammar
 
-Rule 0     S' -> programscope
-Rule 1     alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
-Rule 2     alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
-Rule 3     alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
-Rule 4     enumeration -> term
-Rule 5     enumeration -> term COMMA enumeration
-Rule 6     term -> CHAR
-Rule 7     term -> INT
-Rule 8     term -> STRING
-Rule 9     term -> ID
-Rule 10    term -> CLASSNAME PARSTART enumeration PAREND
-Rule 11    alphabetdescribebody -> paramsdescribe
-Rule 12    alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody
-Rule 13    paramsdescribe -> enumeration FROM ID
-Rule 14    transitionterm -> CHAR
-Rule 15    transitionterm -> INT
-Rule 16    transitionterm -> STRING
-Rule 17    transitionterm -> CLASSNAME PARSTART enumeration PAREND
-Rule 18    transitionkeyword -> ELSE
-Rule 19    transitionkeyword -> DEADEND
-Rule 20    transitionkeyword -> ALPHABET
-Rule 21    transitionkeyword -> ITSELF
-Rule 22    transition -> transitionterm ARROW ID
-Rule 23    transition -> transitionkeyword ARROW ID
-Rule 24    transition -> transitionkeyword ARROW transitionkeyword
-Rule 25    automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-Rule 26    automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND
-Rule 27    statedescription -> transition statedescription
-Rule 28    statedescription -> transition
-Rule 29    states -> states ID statedescription
-Rule 30    states -> ID statedescription
-Rule 31    states -> empty
-Rule 32    termstates -> termstates ID statedescription
-Rule 33    termstates -> ID statedescription
-Rule 34    termstates -> empty
-Rule 35    classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
-Rule 36    field -> ID TYPIZATION CLASSNAME
-Rule 37    field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm
-Rule 38    fields -> field
-Rule 39    fields -> field COMMA fields
-Rule 40    classbody -> method
-Rule 41    classbody -> method classbody
-Rule 42    method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
-Rule 43    compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD
-Rule 44    logicoperations -> compareoperation
-Rule 45    logicoperations -> PARSTART logicoperations PAREND
-Rule 46    logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND
-Rule 47    programscope -> expressions
-Rule 48    programscope -> empty
-Rule 49    expressions -> expression
-Rule 50    expressions -> expression expressions
-Rule 51    expression -> classdef
-Rule 52    expression -> automaton
-Rule 53    expression -> alphabet
-Rule 54    empty -> <empty>
+Rule 0     S' -> expressions
+Rule 1     expressions -> expression
+Rule 2     expressions -> expression expressions
+Rule 3     expression -> classdef
+Rule 4     expression -> automaton
+Rule 5     expression -> alphabet
+Rule 6     empty -> <empty>
+Rule 7     alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
+Rule 8     alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
+Rule 9     alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+Rule 10    enumeration -> term
+Rule 11    enumeration -> term COMMA enumeration
+Rule 12    term -> CHAR
+Rule 13    term -> INT
+Rule 14    term -> STRING
+Rule 15    term -> ID
+Rule 16    term -> CLASSNAME PARSTART enumeration PAREND
+Rule 17    alphabetdescribebody -> paramsdescribe
+Rule 18    alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody
+Rule 19    paramsdescribe -> enumeration FROM ID
+Rule 20    transitionterm -> CHAR
+Rule 21    transitionterm -> INT
+Rule 22    transitionterm -> STRING
+Rule 23    transitionterm -> CLASSNAME PARSTART enumeration PAREND
+Rule 24    transitionkeyword -> ELSE
+Rule 25    transitionkeyword -> DEADEND
+Rule 26    transitionkeyword -> ALPHABET
+Rule 27    transitionkeyword -> ITSELF
+Rule 28    transition -> transitionterm ARROW ID
+Rule 29    transition -> transitionkeyword ARROW ID
+Rule 30    transition -> transitionkeyword ARROW transitionkeyword
+Rule 31    automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+Rule 32    automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND
+Rule 33    statedescription -> transition statedescription
+Rule 34    statedescription -> transition
+Rule 35    states -> states ID statedescription
+Rule 36    states -> ID statedescription
+Rule 37    states -> empty
+Rule 38    termstates -> termstates ID statedescription
+Rule 39    termstates -> ID statedescription
+Rule 40    termstates -> empty
+Rule 41    classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+Rule 42    field -> ID TYPIZATION CLASSNAME
+Rule 43    field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm
+Rule 44    fields -> field
+Rule 45    fields -> field COMMA fields
+Rule 46    classbody -> method
+Rule 47    classbody -> method classbody
+Rule 48    method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+Rule 49    compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD
+Rule 50    logicoperations -> compareoperation
+Rule 51    logicoperations -> PARSTART logicoperations PAREND
+Rule 52    logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND
 
 Terminals, with rules where they appear
 
-ALPHABET             : 20
-ARROW                : 22 23 24
-BLOCKEND             : 1 3 25 26 35 42
-BLOCKSTART           : 1 3 25 26 35 42
-CHAR                 : 6 14
-CLASS                : 35
-CLASSNAME            : 1 2 2 3 3 10 17 25 25 35 35 36 37 42
-COMMA                : 5 12 39
-COMPAREOPERATOR      : 43
-DEADEND              : 19
-DEF                  : 1 2 3 25
-ELSE                 : 18
-EQUALITY             : 1 2 3 25 37
-FROM                 : 13
-FUN                  : 42
-ID                   : 1 2 3 9 13 22 23 25 25 29 30 32 33 36 37 42 43 43
-INT                  : 7 15
-ITSELF               : 21
-LOGICOPERATOR        : 46
-METHOD               : 2 3 25 25 43 43
-OVERRIDE             : 42
-PAREND               : 2 10 17 25 35 42 42 45 46
-PARSTART             : 2 10 17 25 35 42 42 45 46
-RETURN               : 42
-START                : 26
-STRING               : 8 16
-TERMINAL             : 26
-TYPIZATION           : 1 2 3 25 35 36 37 42
+ALPHABET             : 26
+ARROW                : 28 29 30
+BLOCKEND             : 7 9 31 32 41 48
+BLOCKSTART           : 7 9 31 32 41 48
+CHAR                 : 12 20
+CLASS                : 41
+CLASSNAME            : 7 8 8 9 9 16 23 31 31 41 41 42 43 48
+COMMA                : 11 18 45
+COMPAREOPERATOR      : 49
+DEADEND              : 25
+DEF                  : 7 8 9 31
+ELSE                 : 24
+EQUALITY             : 7 8 9 31 43
+FROM                 : 19
+FUN                  : 48
+ID                   : 7 8 9 15 19 28 29 31 31 35 36 38 39 42 43 48 49 49
+INT                  : 13 21
+ITSELF               : 27
+LOGICOPERATOR        : 52
+METHOD               : 8 9 31 31 49 49
+OVERRIDE             : 48
+PAREND               : 8 16 23 31 41 48 48 51 52
+PARSTART             : 8 16 23 31 41 48 48 51 52
+RETURN               : 48
+START                : 32
+STRING               : 14 22
+TERMINAL             : 32
+TYPIZATION           : 7 8 9 31 41 42 43 48
 error                : 
 
 Nonterminals, with rules where they appear
 
-alphabet             : 53
-alphabetdescribebody : 3 12
-automaton            : 52
-automatondescribebody : 25
-classbody            : 35 41
-classdef             : 51
-compareoperation     : 44 46
-empty                : 31 34 48
-enumeration          : 1 2 5 10 13 17
-expression           : 49 50
-expressions          : 47 50
-field                : 38 39
-fields               : 35 39 42
-logicoperations      : 42 45 46
-method               : 40 41
-paramsdescribe       : 11 12
-programscope         : 0
-statedescription     : 26 27 29 30 32 33
-states               : 26 29
-term                 : 4 5
-termstates           : 26 32
-transition           : 27 28
-transitionkeyword    : 23 24 24
-transitionterm       : 22 37
+alphabet             : 5
+alphabetdescribebody : 9 18
+automaton            : 4
+automatondescribebody : 31
+classbody            : 41 47
+classdef             : 3
+compareoperation     : 50 52
+empty                : 37 40
+enumeration          : 7 8 11 16 19 23
+expression           : 1 2
+expressions          : 2 0
+field                : 44 45
+fields               : 41 45 48
+logicoperations      : 48 51 52
+method               : 46 47
+paramsdescribe       : 17 18
+statedescription     : 32 33 35 36 38 39
+states               : 32 35
+term                 : 10 11
+termstates           : 32 38
+transition           : 33 34
+transitionkeyword    : 29 30 30
+transitionterm       : 28 43
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . programscope
-    (47) programscope -> . expressions
-    (48) programscope -> . empty
-    (49) expressions -> . expression
-    (50) expressions -> . expression expressions
-    (54) empty -> .
-    (51) expression -> . classdef
-    (52) expression -> . automaton
-    (53) expression -> . alphabet
-    (35) classdef -> . CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
-    (25) automaton -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (1) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
-    (2) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
-    (3) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (0) S' -> . expressions
+    (1) expressions -> . expression
+    (2) expressions -> . expression expressions
+    (3) expression -> . classdef
+    (4) expression -> . automaton
+    (5) expression -> . alphabet
+    (41) classdef -> . CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+    (31) automaton -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (7) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
+    (8) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
+    (9) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    $end            reduce using rule 54 (empty -> .)
-    CLASS           shift and go to state 8
-    DEF             shift and go to state 9
+    CLASS           shift and go to state 6
+    DEF             shift and go to state 7
 
-    programscope                   shift and go to state 1
-    expressions                    shift and go to state 2
-    empty                          shift and go to state 3
-    expression                     shift and go to state 4
-    classdef                       shift and go to state 5
-    automaton                      shift and go to state 6
-    alphabet                       shift and go to state 7
+    expressions                    shift and go to state 1
+    expression                     shift and go to state 2
+    classdef                       shift and go to state 3
+    automaton                      shift and go to state 4
+    alphabet                       shift and go to state 5
 
 state 1
 
-    (0) S' -> programscope .
+    (0) S' -> expressions .
 
 
 
 state 2
 
-    (47) programscope -> expressions .
+    (1) expressions -> expression .
+    (2) expressions -> expression . expressions
+    (1) expressions -> . expression
+    (2) expressions -> . expression expressions
+    (3) expression -> . classdef
+    (4) expression -> . automaton
+    (5) expression -> . alphabet
+    (41) classdef -> . CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+    (31) automaton -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (7) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
+    (8) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
+    (9) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    $end            reduce using rule 47 (programscope -> expressions .)
+    $end            reduce using rule 1 (expressions -> expression .)
+    CLASS           shift and go to state 6
+    DEF             shift and go to state 7
 
+    expression                     shift and go to state 2
+    expressions                    shift and go to state 8
+    classdef                       shift and go to state 3
+    automaton                      shift and go to state 4
+    alphabet                       shift and go to state 5
 
 state 3
 
-    (48) programscope -> empty .
+    (3) expression -> classdef .
 
-    $end            reduce using rule 48 (programscope -> empty .)
+    CLASS           reduce using rule 3 (expression -> classdef .)
+    DEF             reduce using rule 3 (expression -> classdef .)
+    $end            reduce using rule 3 (expression -> classdef .)
 
 
 state 4
 
-    (49) expressions -> expression .
-    (50) expressions -> expression . expressions
-    (49) expressions -> . expression
-    (50) expressions -> . expression expressions
-    (51) expression -> . classdef
-    (52) expression -> . automaton
-    (53) expression -> . alphabet
-    (35) classdef -> . CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
-    (25) automaton -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (1) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
-    (2) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
-    (3) alphabet -> . DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (4) expression -> automaton .
 
-    $end            reduce using rule 49 (expressions -> expression .)
-    CLASS           shift and go to state 8
-    DEF             shift and go to state 9
+    CLASS           reduce using rule 4 (expression -> automaton .)
+    DEF             reduce using rule 4 (expression -> automaton .)
+    $end            reduce using rule 4 (expression -> automaton .)
 
-    expression                     shift and go to state 4
-    expressions                    shift and go to state 10
-    classdef                       shift and go to state 5
-    automaton                      shift and go to state 6
-    alphabet                       shift and go to state 7
 
 state 5
 
-    (51) expression -> classdef .
+    (5) expression -> alphabet .
 
-    CLASS           reduce using rule 51 (expression -> classdef .)
-    DEF             reduce using rule 51 (expression -> classdef .)
-    $end            reduce using rule 51 (expression -> classdef .)
+    CLASS           reduce using rule 5 (expression -> alphabet .)
+    DEF             reduce using rule 5 (expression -> alphabet .)
+    $end            reduce using rule 5 (expression -> alphabet .)
 
 
 state 6
 
-    (52) expression -> automaton .
+    (41) classdef -> CLASS . CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
 
-    CLASS           reduce using rule 52 (expression -> automaton .)
-    DEF             reduce using rule 52 (expression -> automaton .)
-    $end            reduce using rule 52 (expression -> automaton .)
+    CLASSNAME       shift and go to state 9
 
 
 state 7
 
-    (53) expression -> alphabet .
+    (31) automaton -> DEF . ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (7) alphabet -> DEF . ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
+    (8) alphabet -> DEF . ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
+    (9) alphabet -> DEF . ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    CLASS           reduce using rule 53 (expression -> alphabet .)
-    DEF             reduce using rule 53 (expression -> alphabet .)
-    $end            reduce using rule 53 (expression -> alphabet .)
+    ID              shift and go to state 10
 
 
 state 8
 
-    (35) classdef -> CLASS . CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+    (2) expressions -> expression expressions .
 
-    CLASSNAME       shift and go to state 11
+    $end            reduce using rule 2 (expressions -> expression expressions .)
 
 
 state 9
 
-    (25) automaton -> DEF . ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (1) alphabet -> DEF . ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
-    (2) alphabet -> DEF . ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
-    (3) alphabet -> DEF . ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (41) classdef -> CLASS CLASSNAME . PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
 
-    ID              shift and go to state 12
+    PARSTART        shift and go to state 11
 
 
 state 10
 
-    (50) expressions -> expression expressions .
+    (31) automaton -> DEF ID . TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (7) alphabet -> DEF ID . TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
+    (8) alphabet -> DEF ID . TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
+    (9) alphabet -> DEF ID . TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    $end            reduce using rule 50 (expressions -> expression expressions .)
+    TYPIZATION      shift and go to state 12
 
 
 state 11
 
-    (35) classdef -> CLASS CLASSNAME . PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+    (41) classdef -> CLASS CLASSNAME PARSTART . fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+    (44) fields -> . field
+    (45) fields -> . field COMMA fields
+    (42) field -> . ID TYPIZATION CLASSNAME
+    (43) field -> . ID TYPIZATION CLASSNAME EQUALITY transitionterm
 
-    PARSTART        shift and go to state 13
+    ID              shift and go to state 15
 
+    fields                         shift and go to state 13
+    field                          shift and go to state 14
 
 state 12
 
-    (25) automaton -> DEF ID . TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (1) alphabet -> DEF ID . TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
-    (2) alphabet -> DEF ID . TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
-    (3) alphabet -> DEF ID . TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (31) automaton -> DEF ID TYPIZATION . CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (7) alphabet -> DEF ID TYPIZATION . CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
+    (8) alphabet -> DEF ID TYPIZATION . CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
+    (9) alphabet -> DEF ID TYPIZATION . CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    TYPIZATION      shift and go to state 14
+    CLASSNAME       shift and go to state 16
 
 
 state 13
 
-    (35) classdef -> CLASS CLASSNAME PARSTART . fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
-    (38) fields -> . field
-    (39) fields -> . field COMMA fields
-    (36) field -> . ID TYPIZATION CLASSNAME
-    (37) field -> . ID TYPIZATION CLASSNAME EQUALITY transitionterm
+    (41) classdef -> CLASS CLASSNAME PARSTART fields . PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
 
-    ID              shift and go to state 17
+    PAREND          shift and go to state 17
 
-    fields                         shift and go to state 15
-    field                          shift and go to state 16
 
 state 14
 
-    (25) automaton -> DEF ID TYPIZATION . CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (1) alphabet -> DEF ID TYPIZATION . CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
-    (2) alphabet -> DEF ID TYPIZATION . CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
-    (3) alphabet -> DEF ID TYPIZATION . CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (44) fields -> field .
+    (45) fields -> field . COMMA fields
 
-    CLASSNAME       shift and go to state 18
+    PAREND          reduce using rule 44 (fields -> field .)
+    COMMA           shift and go to state 18
 
 
 state 15
 
-    (35) classdef -> CLASS CLASSNAME PARSTART fields . PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+    (42) field -> ID . TYPIZATION CLASSNAME
+    (43) field -> ID . TYPIZATION CLASSNAME EQUALITY transitionterm
 
-    PAREND          shift and go to state 19
+    TYPIZATION      shift and go to state 19
 
 
 state 16
 
-    (38) fields -> field .
-    (39) fields -> field . COMMA fields
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME . EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (7) alphabet -> DEF ID TYPIZATION CLASSNAME . EQUALITY BLOCKSTART enumeration BLOCKEND
+    (8) alphabet -> DEF ID TYPIZATION CLASSNAME . EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
+    (9) alphabet -> DEF ID TYPIZATION CLASSNAME . EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    PAREND          reduce using rule 38 (fields -> field .)
-    COMMA           shift and go to state 20
+    EQUALITY        shift and go to state 20
 
 
 state 17
 
-    (36) field -> ID . TYPIZATION CLASSNAME
-    (37) field -> ID . TYPIZATION CLASSNAME EQUALITY transitionterm
+    (41) classdef -> CLASS CLASSNAME PARSTART fields PAREND . TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
 
     TYPIZATION      shift and go to state 21
 
 
 state 18
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME . EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (1) alphabet -> DEF ID TYPIZATION CLASSNAME . EQUALITY BLOCKSTART enumeration BLOCKEND
-    (2) alphabet -> DEF ID TYPIZATION CLASSNAME . EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
-    (3) alphabet -> DEF ID TYPIZATION CLASSNAME . EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (45) fields -> field COMMA . fields
+    (44) fields -> . field
+    (45) fields -> . field COMMA fields
+    (42) field -> . ID TYPIZATION CLASSNAME
+    (43) field -> . ID TYPIZATION CLASSNAME EQUALITY transitionterm
 
-    EQUALITY        shift and go to state 22
+    ID              shift and go to state 15
 
+    field                          shift and go to state 14
+    fields                         shift and go to state 22
 
 state 19
 
-    (35) classdef -> CLASS CLASSNAME PARSTART fields PAREND . TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND
+    (42) field -> ID TYPIZATION . CLASSNAME
+    (43) field -> ID TYPIZATION . CLASSNAME EQUALITY transitionterm
 
-    TYPIZATION      shift and go to state 23
+    CLASSNAME       shift and go to state 23
 
 
 state 20
 
-    (39) fields -> field COMMA . fields
-    (38) fields -> . field
-    (39) fields -> . field COMMA fields
-    (36) field -> . ID TYPIZATION CLASSNAME
-    (37) field -> . ID TYPIZATION CLASSNAME EQUALITY transitionterm
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY . CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (7) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY . BLOCKSTART enumeration BLOCKEND
+    (8) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY . CLASSNAME METHOD PARSTART enumeration PAREND
+    (9) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY . CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    ID              shift and go to state 17
+    CLASSNAME       shift and go to state 24
+    BLOCKSTART      shift and go to state 25
 
-    field                          shift and go to state 16
-    fields                         shift and go to state 24
 
 state 21
 
-    (36) field -> ID TYPIZATION . CLASSNAME
-    (37) field -> ID TYPIZATION . CLASSNAME EQUALITY transitionterm
+    (41) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION . CLASSNAME BLOCKSTART classbody BLOCKEND
 
-    CLASSNAME       shift and go to state 25
+    CLASSNAME       shift and go to state 26
 
 
 state 22
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY . CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (1) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY . BLOCKSTART enumeration BLOCKEND
-    (2) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY . CLASSNAME METHOD PARSTART enumeration PAREND
-    (3) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY . CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (45) fields -> field COMMA fields .
 
-    CLASSNAME       shift and go to state 26
-    BLOCKSTART      shift and go to state 27
+    PAREND          reduce using rule 45 (fields -> field COMMA fields .)
 
 
 state 23
 
-    (35) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION . CLASSNAME BLOCKSTART classbody BLOCKEND
+    (42) field -> ID TYPIZATION CLASSNAME .
+    (43) field -> ID TYPIZATION CLASSNAME . EQUALITY transitionterm
 
-    CLASSNAME       shift and go to state 28
+    COMMA           reduce using rule 42 (field -> ID TYPIZATION CLASSNAME .)
+    PAREND          reduce using rule 42 (field -> ID TYPIZATION CLASSNAME .)
+    EQUALITY        shift and go to state 27
 
 
 state 24
 
-    (39) fields -> field COMMA fields .
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME . METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (8) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME . METHOD PARSTART enumeration PAREND
+    (9) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME . METHOD BLOCKSTART alphabetdescribebody BLOCKEND
 
-    PAREND          reduce using rule 39 (fields -> field COMMA fields .)
+    METHOD          shift and go to state 28
 
 
 state 25
 
-    (36) field -> ID TYPIZATION CLASSNAME .
-    (37) field -> ID TYPIZATION CLASSNAME . EQUALITY transitionterm
+    (7) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART . enumeration BLOCKEND
+    (10) enumeration -> . term
+    (11) enumeration -> . term COMMA enumeration
+    (12) term -> . CHAR
+    (13) term -> . INT
+    (14) term -> . STRING
+    (15) term -> . ID
+    (16) term -> . CLASSNAME PARSTART enumeration PAREND
 
-    COMMA           reduce using rule 36 (field -> ID TYPIZATION CLASSNAME .)
-    PAREND          reduce using rule 36 (field -> ID TYPIZATION CLASSNAME .)
-    EQUALITY        shift and go to state 29
+    CHAR            shift and go to state 33
+    INT             shift and go to state 34
+    STRING          shift and go to state 35
+    ID              shift and go to state 29
+    CLASSNAME       shift and go to state 30
 
+    enumeration                    shift and go to state 31
+    term                           shift and go to state 32
 
 state 26
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME . METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (2) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME . METHOD PARSTART enumeration PAREND
-    (3) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME . METHOD BLOCKSTART alphabetdescribebody BLOCKEND
+    (41) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME . BLOCKSTART classbody BLOCKEND
 
-    METHOD          shift and go to state 30
+    BLOCKSTART      shift and go to state 36
 
 
 state 27
 
-    (1) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART . enumeration BLOCKEND
-    (4) enumeration -> . term
-    (5) enumeration -> . term COMMA enumeration
-    (6) term -> . CHAR
-    (7) term -> . INT
-    (8) term -> . STRING
-    (9) term -> . ID
-    (10) term -> . CLASSNAME PARSTART enumeration PAREND
+    (43) field -> ID TYPIZATION CLASSNAME EQUALITY . transitionterm
+    (20) transitionterm -> . CHAR
+    (21) transitionterm -> . INT
+    (22) transitionterm -> . STRING
+    (23) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
 
-    CHAR            shift and go to state 35
-    INT             shift and go to state 36
-    STRING          shift and go to state 37
-    ID              shift and go to state 31
-    CLASSNAME       shift and go to state 32
+    CHAR            shift and go to state 39
+    INT             shift and go to state 40
+    STRING          shift and go to state 41
+    CLASSNAME       shift and go to state 37
 
-    enumeration                    shift and go to state 33
-    term                           shift and go to state 34
+    transitionterm                 shift and go to state 38
 
 state 28
 
-    (35) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME . BLOCKSTART classbody BLOCKEND
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD . PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (8) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD . PARSTART enumeration PAREND
+    (9) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD . BLOCKSTART alphabetdescribebody BLOCKEND
 
-    BLOCKSTART      shift and go to state 38
+    PARSTART        shift and go to state 42
+    BLOCKSTART      shift and go to state 43
 
 
 state 29
 
-    (37) field -> ID TYPIZATION CLASSNAME EQUALITY . transitionterm
-    (14) transitionterm -> . CHAR
-    (15) transitionterm -> . INT
-    (16) transitionterm -> . STRING
-    (17) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
+    (15) term -> ID .
 
-    CHAR            shift and go to state 41
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    CLASSNAME       shift and go to state 39
+    COMMA           reduce using rule 15 (term -> ID .)
+    BLOCKEND        reduce using rule 15 (term -> ID .)
+    FROM            reduce using rule 15 (term -> ID .)
+    PAREND          reduce using rule 15 (term -> ID .)
 
-    transitionterm                 shift and go to state 40
 
 state 30
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD . PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (2) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD . PARSTART enumeration PAREND
-    (3) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD . BLOCKSTART alphabetdescribebody BLOCKEND
+    (16) term -> CLASSNAME . PARSTART enumeration PAREND
 
     PARSTART        shift and go to state 44
-    BLOCKSTART      shift and go to state 45
 
 
 state 31
 
-    (9) term -> ID .
+    (7) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration . BLOCKEND
 
-    COMMA           reduce using rule 9 (term -> ID .)
-    BLOCKEND        reduce using rule 9 (term -> ID .)
-    FROM            reduce using rule 9 (term -> ID .)
-    PAREND          reduce using rule 9 (term -> ID .)
+    BLOCKEND        shift and go to state 45
 
 
 state 32
 
-    (10) term -> CLASSNAME . PARSTART enumeration PAREND
+    (10) enumeration -> term .
+    (11) enumeration -> term . COMMA enumeration
 
-    PARSTART        shift and go to state 46
+    BLOCKEND        reduce using rule 10 (enumeration -> term .)
+    PAREND          reduce using rule 10 (enumeration -> term .)
+    FROM            reduce using rule 10 (enumeration -> term .)
+    COMMA           shift and go to state 46
 
 
 state 33
 
-    (1) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration . BLOCKEND
+    (12) term -> CHAR .
 
-    BLOCKEND        shift and go to state 47
+    COMMA           reduce using rule 12 (term -> CHAR .)
+    BLOCKEND        reduce using rule 12 (term -> CHAR .)
+    PAREND          reduce using rule 12 (term -> CHAR .)
+    FROM            reduce using rule 12 (term -> CHAR .)
 
 
 state 34
 
-    (4) enumeration -> term .
-    (5) enumeration -> term . COMMA enumeration
+    (13) term -> INT .
 
-    BLOCKEND        reduce using rule 4 (enumeration -> term .)
-    PAREND          reduce using rule 4 (enumeration -> term .)
-    FROM            reduce using rule 4 (enumeration -> term .)
-    COMMA           shift and go to state 48
+    COMMA           reduce using rule 13 (term -> INT .)
+    BLOCKEND        reduce using rule 13 (term -> INT .)
+    PAREND          reduce using rule 13 (term -> INT .)
+    FROM            reduce using rule 13 (term -> INT .)
 
 
 state 35
 
-    (6) term -> CHAR .
+    (14) term -> STRING .
 
-    COMMA           reduce using rule 6 (term -> CHAR .)
-    BLOCKEND        reduce using rule 6 (term -> CHAR .)
-    PAREND          reduce using rule 6 (term -> CHAR .)
-    FROM            reduce using rule 6 (term -> CHAR .)
+    COMMA           reduce using rule 14 (term -> STRING .)
+    BLOCKEND        reduce using rule 14 (term -> STRING .)
+    PAREND          reduce using rule 14 (term -> STRING .)
+    FROM            reduce using rule 14 (term -> STRING .)
 
 
 state 36
 
-    (7) term -> INT .
+    (41) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART . classbody BLOCKEND
+    (46) classbody -> . method
+    (47) classbody -> . method classbody
+    (48) method -> . OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    COMMA           reduce using rule 7 (term -> INT .)
-    BLOCKEND        reduce using rule 7 (term -> INT .)
-    PAREND          reduce using rule 7 (term -> INT .)
-    FROM            reduce using rule 7 (term -> INT .)
+    OVERRIDE        shift and go to state 49
 
+    classbody                      shift and go to state 47
+    method                         shift and go to state 48
 
 state 37
 
-    (8) term -> STRING .
+    (23) transitionterm -> CLASSNAME . PARSTART enumeration PAREND
 
-    COMMA           reduce using rule 8 (term -> STRING .)
-    BLOCKEND        reduce using rule 8 (term -> STRING .)
-    PAREND          reduce using rule 8 (term -> STRING .)
-    FROM            reduce using rule 8 (term -> STRING .)
+    PARSTART        shift and go to state 50
 
 
 state 38
 
-    (35) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART . classbody BLOCKEND
-    (40) classbody -> . method
-    (41) classbody -> . method classbody
-    (42) method -> . OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (43) field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm .
 
-    OVERRIDE        shift and go to state 51
+    COMMA           reduce using rule 43 (field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm .)
+    PAREND          reduce using rule 43 (field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm .)
 
-    classbody                      shift and go to state 49
-    method                         shift and go to state 50
 
 state 39
 
-    (17) transitionterm -> CLASSNAME . PARSTART enumeration PAREND
+    (20) transitionterm -> CHAR .
 
-    PARSTART        shift and go to state 52
+    COMMA           reduce using rule 20 (transitionterm -> CHAR .)
+    PAREND          reduce using rule 20 (transitionterm -> CHAR .)
+    ARROW           reduce using rule 20 (transitionterm -> CHAR .)
 
 
 state 40
 
-    (37) field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm .
+    (21) transitionterm -> INT .
 
-    COMMA           reduce using rule 37 (field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm .)
-    PAREND          reduce using rule 37 (field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm .)
+    COMMA           reduce using rule 21 (transitionterm -> INT .)
+    PAREND          reduce using rule 21 (transitionterm -> INT .)
+    ARROW           reduce using rule 21 (transitionterm -> INT .)
 
 
 state 41
 
-    (14) transitionterm -> CHAR .
+    (22) transitionterm -> STRING .
 
-    COMMA           reduce using rule 14 (transitionterm -> CHAR .)
-    PAREND          reduce using rule 14 (transitionterm -> CHAR .)
-    ARROW           reduce using rule 14 (transitionterm -> CHAR .)
+    COMMA           reduce using rule 22 (transitionterm -> STRING .)
+    PAREND          reduce using rule 22 (transitionterm -> STRING .)
+    ARROW           reduce using rule 22 (transitionterm -> STRING .)
 
 
 state 42
 
-    (15) transitionterm -> INT .
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART . ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (8) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART . enumeration PAREND
+    (10) enumeration -> . term
+    (11) enumeration -> . term COMMA enumeration
+    (12) term -> . CHAR
+    (13) term -> . INT
+    (14) term -> . STRING
+    (15) term -> . ID
+    (16) term -> . CLASSNAME PARSTART enumeration PAREND
 
-    COMMA           reduce using rule 15 (transitionterm -> INT .)
-    PAREND          reduce using rule 15 (transitionterm -> INT .)
-    ARROW           reduce using rule 15 (transitionterm -> INT .)
+    ID              shift and go to state 51
+    CHAR            shift and go to state 33
+    INT             shift and go to state 34
+    STRING          shift and go to state 35
+    CLASSNAME       shift and go to state 30
 
+    enumeration                    shift and go to state 52
+    term                           shift and go to state 32
 
 state 43
 
-    (16) transitionterm -> STRING .
+    (9) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART . alphabetdescribebody BLOCKEND
+    (17) alphabetdescribebody -> . paramsdescribe
+    (18) alphabetdescribebody -> . paramsdescribe COMMA alphabetdescribebody
+    (19) paramsdescribe -> . enumeration FROM ID
+    (10) enumeration -> . term
+    (11) enumeration -> . term COMMA enumeration
+    (12) term -> . CHAR
+    (13) term -> . INT
+    (14) term -> . STRING
+    (15) term -> . ID
+    (16) term -> . CLASSNAME PARSTART enumeration PAREND
 
-    COMMA           reduce using rule 16 (transitionterm -> STRING .)
-    PAREND          reduce using rule 16 (transitionterm -> STRING .)
-    ARROW           reduce using rule 16 (transitionterm -> STRING .)
+    CHAR            shift and go to state 33
+    INT             shift and go to state 34
+    STRING          shift and go to state 35
+    ID              shift and go to state 29
+    CLASSNAME       shift and go to state 30
 
+    alphabetdescribebody           shift and go to state 53
+    paramsdescribe                 shift and go to state 54
+    enumeration                    shift and go to state 55
+    term                           shift and go to state 32
 
 state 44
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART . ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (2) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART . enumeration PAREND
-    (4) enumeration -> . term
-    (5) enumeration -> . term COMMA enumeration
-    (6) term -> . CHAR
-    (7) term -> . INT
-    (8) term -> . STRING
-    (9) term -> . ID
-    (10) term -> . CLASSNAME PARSTART enumeration PAREND
+    (16) term -> CLASSNAME PARSTART . enumeration PAREND
+    (10) enumeration -> . term
+    (11) enumeration -> . term COMMA enumeration
+    (12) term -> . CHAR
+    (13) term -> . INT
+    (14) term -> . STRING
+    (15) term -> . ID
+    (16) term -> . CLASSNAME PARSTART enumeration PAREND
 
-    ID              shift and go to state 53
-    CHAR            shift and go to state 35
-    INT             shift and go to state 36
-    STRING          shift and go to state 37
-    CLASSNAME       shift and go to state 32
+    CHAR            shift and go to state 33
+    INT             shift and go to state 34
+    STRING          shift and go to state 35
+    ID              shift and go to state 29
+    CLASSNAME       shift and go to state 30
 
-    enumeration                    shift and go to state 54
-    term                           shift and go to state 34
+    enumeration                    shift and go to state 56
+    term                           shift and go to state 32
 
 state 45
 
-    (3) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART . alphabetdescribebody BLOCKEND
-    (11) alphabetdescribebody -> . paramsdescribe
-    (12) alphabetdescribebody -> . paramsdescribe COMMA alphabetdescribebody
-    (13) paramsdescribe -> . enumeration FROM ID
-    (4) enumeration -> . term
-    (5) enumeration -> . term COMMA enumeration
-    (6) term -> . CHAR
-    (7) term -> . INT
-    (8) term -> . STRING
-    (9) term -> . ID
-    (10) term -> . CLASSNAME PARSTART enumeration PAREND
+    (7) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .
 
-    CHAR            shift and go to state 35
-    INT             shift and go to state 36
-    STRING          shift and go to state 37
-    ID              shift and go to state 31
-    CLASSNAME       shift and go to state 32
+    CLASS           reduce using rule 7 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .)
+    DEF             reduce using rule 7 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .)
+    $end            reduce using rule 7 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .)
 
-    alphabetdescribebody           shift and go to state 55
-    paramsdescribe                 shift and go to state 56
-    enumeration                    shift and go to state 57
-    term                           shift and go to state 34
 
 state 46
 
-    (10) term -> CLASSNAME PARSTART . enumeration PAREND
-    (4) enumeration -> . term
-    (5) enumeration -> . term COMMA enumeration
-    (6) term -> . CHAR
-    (7) term -> . INT
-    (8) term -> . STRING
-    (9) term -> . ID
-    (10) term -> . CLASSNAME PARSTART enumeration PAREND
+    (11) enumeration -> term COMMA . enumeration
+    (10) enumeration -> . term
+    (11) enumeration -> . term COMMA enumeration
+    (12) term -> . CHAR
+    (13) term -> . INT
+    (14) term -> . STRING
+    (15) term -> . ID
+    (16) term -> . CLASSNAME PARSTART enumeration PAREND
 
-    CHAR            shift and go to state 35
-    INT             shift and go to state 36
-    STRING          shift and go to state 37
-    ID              shift and go to state 31
-    CLASSNAME       shift and go to state 32
+    CHAR            shift and go to state 33
+    INT             shift and go to state 34
+    STRING          shift and go to state 35
+    ID              shift and go to state 29
+    CLASSNAME       shift and go to state 30
 
-    enumeration                    shift and go to state 58
-    term                           shift and go to state 34
+    term                           shift and go to state 32
+    enumeration                    shift and go to state 57
 
 state 47
 
-    (1) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .
+    (41) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody . BLOCKEND
 
-    CLASS           reduce using rule 1 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .)
-    DEF             reduce using rule 1 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .)
-    $end            reduce using rule 1 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND .)
+    BLOCKEND        shift and go to state 58
 
 
 state 48
 
-    (5) enumeration -> term COMMA . enumeration
-    (4) enumeration -> . term
-    (5) enumeration -> . term COMMA enumeration
-    (6) term -> . CHAR
-    (7) term -> . INT
-    (8) term -> . STRING
-    (9) term -> . ID
-    (10) term -> . CLASSNAME PARSTART enumeration PAREND
+    (46) classbody -> method .
+    (47) classbody -> method . classbody
+    (46) classbody -> . method
+    (47) classbody -> . method classbody
+    (48) method -> . OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    CHAR            shift and go to state 35
-    INT             shift and go to state 36
-    STRING          shift and go to state 37
-    ID              shift and go to state 31
-    CLASSNAME       shift and go to state 32
+    BLOCKEND        reduce using rule 46 (classbody -> method .)
+    OVERRIDE        shift and go to state 49
 
-    term                           shift and go to state 34
-    enumeration                    shift and go to state 59
+    method                         shift and go to state 48
+    classbody                      shift and go to state 59
 
 state 49
 
-    (35) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody . BLOCKEND
+    (48) method -> OVERRIDE . FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    BLOCKEND        shift and go to state 60
+    FUN             shift and go to state 60
 
 
 state 50
 
-    (40) classbody -> method .
-    (41) classbody -> method . classbody
-    (40) classbody -> . method
-    (41) classbody -> . method classbody
-    (42) method -> . OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (23) transitionterm -> CLASSNAME PARSTART . enumeration PAREND
+    (10) enumeration -> . term
+    (11) enumeration -> . term COMMA enumeration
+    (12) term -> . CHAR
+    (13) term -> . INT
+    (14) term -> . STRING
+    (15) term -> . ID
+    (16) term -> . CLASSNAME PARSTART enumeration PAREND
 
-    BLOCKEND        reduce using rule 40 (classbody -> method .)
-    OVERRIDE        shift and go to state 51
+    CHAR            shift and go to state 33
+    INT             shift and go to state 34
+    STRING          shift and go to state 35
+    ID              shift and go to state 29
+    CLASSNAME       shift and go to state 30
 
-    method                         shift and go to state 50
-    classbody                      shift and go to state 61
+    enumeration                    shift and go to state 61
+    term                           shift and go to state 32
 
 state 51
 
-    (42) method -> OVERRIDE . FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID . PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (15) term -> ID .
 
-    FUN             shift and go to state 62
+  ! shift/reduce conflict for PAREND resolved as shift
+    PAREND          shift and go to state 62
+    COMMA           reduce using rule 15 (term -> ID .)
+
+  ! PAREND          [ reduce using rule 15 (term -> ID .) ]
 
 
 state 52
 
-    (17) transitionterm -> CLASSNAME PARSTART . enumeration PAREND
-    (4) enumeration -> . term
-    (5) enumeration -> . term COMMA enumeration
-    (6) term -> . CHAR
-    (7) term -> . INT
-    (8) term -> . STRING
-    (9) term -> . ID
-    (10) term -> . CLASSNAME PARSTART enumeration PAREND
+    (8) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration . PAREND
 
-    CHAR            shift and go to state 35
-    INT             shift and go to state 36
-    STRING          shift and go to state 37
-    ID              shift and go to state 31
-    CLASSNAME       shift and go to state 32
+    PAREND          shift and go to state 63
 
-    enumeration                    shift and go to state 63
-    term                           shift and go to state 34
 
 state 53
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID . PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND
-    (9) term -> ID .
+    (9) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody . BLOCKEND
 
-  ! shift/reduce conflict for PAREND resolved as shift
-    PAREND          shift and go to state 64
-    COMMA           reduce using rule 9 (term -> ID .)
-
-  ! PAREND          [ reduce using rule 9 (term -> ID .) ]
+    BLOCKEND        shift and go to state 64
 
 
 state 54
 
-    (2) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration . PAREND
+    (17) alphabetdescribebody -> paramsdescribe .
+    (18) alphabetdescribebody -> paramsdescribe . COMMA alphabetdescribebody
 
-    PAREND          shift and go to state 65
+    BLOCKEND        reduce using rule 17 (alphabetdescribebody -> paramsdescribe .)
+    COMMA           shift and go to state 65
 
 
 state 55
 
-    (3) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody . BLOCKEND
+    (19) paramsdescribe -> enumeration . FROM ID
 
-    BLOCKEND        shift and go to state 66
+    FROM            shift and go to state 66
 
 
 state 56
 
-    (11) alphabetdescribebody -> paramsdescribe .
-    (12) alphabetdescribebody -> paramsdescribe . COMMA alphabetdescribebody
+    (16) term -> CLASSNAME PARSTART enumeration . PAREND
 
-    BLOCKEND        reduce using rule 11 (alphabetdescribebody -> paramsdescribe .)
-    COMMA           shift and go to state 67
+    PAREND          shift and go to state 67
 
 
 state 57
 
-    (13) paramsdescribe -> enumeration . FROM ID
+    (11) enumeration -> term COMMA enumeration .
 
-    FROM            shift and go to state 68
+    BLOCKEND        reduce using rule 11 (enumeration -> term COMMA enumeration .)
+    PAREND          reduce using rule 11 (enumeration -> term COMMA enumeration .)
+    FROM            reduce using rule 11 (enumeration -> term COMMA enumeration .)
 
 
 state 58
 
-    (10) term -> CLASSNAME PARSTART enumeration . PAREND
+    (41) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .
 
-    PAREND          shift and go to state 69
+    CLASS           reduce using rule 41 (classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .)
+    DEF             reduce using rule 41 (classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .)
+    $end            reduce using rule 41 (classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .)
 
 
 state 59
 
-    (5) enumeration -> term COMMA enumeration .
+    (47) classbody -> method classbody .
 
-    BLOCKEND        reduce using rule 5 (enumeration -> term COMMA enumeration .)
-    PAREND          reduce using rule 5 (enumeration -> term COMMA enumeration .)
-    FROM            reduce using rule 5 (enumeration -> term COMMA enumeration .)
+    BLOCKEND        reduce using rule 47 (classbody -> method classbody .)
 
 
 state 60
 
-    (35) classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .
+    (48) method -> OVERRIDE FUN . ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    CLASS           reduce using rule 35 (classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .)
-    DEF             reduce using rule 35 (classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .)
-    $end            reduce using rule 35 (classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND .)
+    ID              shift and go to state 68
 
 
 state 61
 
-    (41) classbody -> method classbody .
+    (23) transitionterm -> CLASSNAME PARSTART enumeration . PAREND
 
-    BLOCKEND        reduce using rule 41 (classbody -> method classbody .)
+    PAREND          shift and go to state 69
 
 
 state 62
 
-    (42) method -> OVERRIDE FUN . ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND . METHOD BLOCKSTART automatondescribebody BLOCKEND
 
-    ID              shift and go to state 70
+    METHOD          shift and go to state 70
 
 
 state 63
 
-    (17) transitionterm -> CLASSNAME PARSTART enumeration . PAREND
+    (8) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .
 
-    PAREND          shift and go to state 71
+    CLASS           reduce using rule 8 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .)
+    DEF             reduce using rule 8 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .)
+    $end            reduce using rule 8 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .)
 
 
 state 64
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND . METHOD BLOCKSTART automatondescribebody BLOCKEND
+    (9) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .
 
-    METHOD          shift and go to state 72
+    CLASS           reduce using rule 9 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .)
+    DEF             reduce using rule 9 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .)
+    $end            reduce using rule 9 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .)
 
 
 state 65
 
-    (2) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .
+    (18) alphabetdescribebody -> paramsdescribe COMMA . alphabetdescribebody
+    (17) alphabetdescribebody -> . paramsdescribe
+    (18) alphabetdescribebody -> . paramsdescribe COMMA alphabetdescribebody
+    (19) paramsdescribe -> . enumeration FROM ID
+    (10) enumeration -> . term
+    (11) enumeration -> . term COMMA enumeration
+    (12) term -> . CHAR
+    (13) term -> . INT
+    (14) term -> . STRING
+    (15) term -> . ID
+    (16) term -> . CLASSNAME PARSTART enumeration PAREND
 
-    CLASS           reduce using rule 2 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .)
-    DEF             reduce using rule 2 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .)
-    $end            reduce using rule 2 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND .)
+    CHAR            shift and go to state 33
+    INT             shift and go to state 34
+    STRING          shift and go to state 35
+    ID              shift and go to state 29
+    CLASSNAME       shift and go to state 30
 
+    paramsdescribe                 shift and go to state 54
+    alphabetdescribebody           shift and go to state 71
+    enumeration                    shift and go to state 55
+    term                           shift and go to state 32
 
 state 66
 
-    (3) alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .
+    (19) paramsdescribe -> enumeration FROM . ID
 
-    CLASS           reduce using rule 3 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .)
-    DEF             reduce using rule 3 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .)
-    $end            reduce using rule 3 (alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND .)
+    ID              shift and go to state 72
 
 
 state 67
 
-    (12) alphabetdescribebody -> paramsdescribe COMMA . alphabetdescribebody
-    (11) alphabetdescribebody -> . paramsdescribe
-    (12) alphabetdescribebody -> . paramsdescribe COMMA alphabetdescribebody
-    (13) paramsdescribe -> . enumeration FROM ID
-    (4) enumeration -> . term
-    (5) enumeration -> . term COMMA enumeration
-    (6) term -> . CHAR
-    (7) term -> . INT
-    (8) term -> . STRING
-    (9) term -> . ID
-    (10) term -> . CLASSNAME PARSTART enumeration PAREND
+    (16) term -> CLASSNAME PARSTART enumeration PAREND .
 
-    CHAR            shift and go to state 35
-    INT             shift and go to state 36
-    STRING          shift and go to state 37
-    ID              shift and go to state 31
-    CLASSNAME       shift and go to state 32
+    COMMA           reduce using rule 16 (term -> CLASSNAME PARSTART enumeration PAREND .)
+    BLOCKEND        reduce using rule 16 (term -> CLASSNAME PARSTART enumeration PAREND .)
+    PAREND          reduce using rule 16 (term -> CLASSNAME PARSTART enumeration PAREND .)
+    FROM            reduce using rule 16 (term -> CLASSNAME PARSTART enumeration PAREND .)
 
-    paramsdescribe                 shift and go to state 56
-    alphabetdescribebody           shift and go to state 73
-    enumeration                    shift and go to state 57
-    term                           shift and go to state 34
 
 state 68
 
-    (13) paramsdescribe -> enumeration FROM . ID
+    (48) method -> OVERRIDE FUN ID . PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    ID              shift and go to state 74
+    PARSTART        shift and go to state 73
 
 
 state 69
 
-    (10) term -> CLASSNAME PARSTART enumeration PAREND .
+    (23) transitionterm -> CLASSNAME PARSTART enumeration PAREND .
 
-    COMMA           reduce using rule 10 (term -> CLASSNAME PARSTART enumeration PAREND .)
-    BLOCKEND        reduce using rule 10 (term -> CLASSNAME PARSTART enumeration PAREND .)
-    PAREND          reduce using rule 10 (term -> CLASSNAME PARSTART enumeration PAREND .)
-    FROM            reduce using rule 10 (term -> CLASSNAME PARSTART enumeration PAREND .)
+    COMMA           reduce using rule 23 (transitionterm -> CLASSNAME PARSTART enumeration PAREND .)
+    PAREND          reduce using rule 23 (transitionterm -> CLASSNAME PARSTART enumeration PAREND .)
+    ARROW           reduce using rule 23 (transitionterm -> CLASSNAME PARSTART enumeration PAREND .)
 
 
 state 70
 
-    (42) method -> OVERRIDE FUN ID . PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD . BLOCKSTART automatondescribebody BLOCKEND
 
-    PARSTART        shift and go to state 75
+    BLOCKSTART      shift and go to state 74
 
 
 state 71
 
-    (17) transitionterm -> CLASSNAME PARSTART enumeration PAREND .
+    (18) alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody .
 
-    COMMA           reduce using rule 17 (transitionterm -> CLASSNAME PARSTART enumeration PAREND .)
-    PAREND          reduce using rule 17 (transitionterm -> CLASSNAME PARSTART enumeration PAREND .)
-    ARROW           reduce using rule 17 (transitionterm -> CLASSNAME PARSTART enumeration PAREND .)
+    BLOCKEND        reduce using rule 18 (alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody .)
 
 
 state 72
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD . BLOCKSTART automatondescribebody BLOCKEND
+    (19) paramsdescribe -> enumeration FROM ID .
 
-    BLOCKSTART      shift and go to state 76
+    COMMA           reduce using rule 19 (paramsdescribe -> enumeration FROM ID .)
+    BLOCKEND        reduce using rule 19 (paramsdescribe -> enumeration FROM ID .)
 
 
 state 73
 
-    (12) alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody .
+    (48) method -> OVERRIDE FUN ID PARSTART . fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (44) fields -> . field
+    (45) fields -> . field COMMA fields
+    (42) field -> . ID TYPIZATION CLASSNAME
+    (43) field -> . ID TYPIZATION CLASSNAME EQUALITY transitionterm
 
-    BLOCKEND        reduce using rule 12 (alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody .)
+    ID              shift and go to state 15
 
+    fields                         shift and go to state 75
+    field                          shift and go to state 14
 
 state 74
 
-    (13) paramsdescribe -> enumeration FROM ID .
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART . automatondescribebody BLOCKEND
+    (32) automatondescribebody -> . START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND
 
-    COMMA           reduce using rule 13 (paramsdescribe -> enumeration FROM ID .)
-    BLOCKEND        reduce using rule 13 (paramsdescribe -> enumeration FROM ID .)
+    START           shift and go to state 77
 
+    automatondescribebody          shift and go to state 76
 
 state 75
 
-    (42) method -> OVERRIDE FUN ID PARSTART . fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
-    (38) fields -> . field
-    (39) fields -> . field COMMA fields
-    (36) field -> . ID TYPIZATION CLASSNAME
-    (37) field -> . ID TYPIZATION CLASSNAME EQUALITY transitionterm
+    (48) method -> OVERRIDE FUN ID PARSTART fields . PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    ID              shift and go to state 17
+    PAREND          shift and go to state 78
 
-    fields                         shift and go to state 77
-    field                          shift and go to state 16
 
 state 76
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART . automatondescribebody BLOCKEND
-    (26) automatondescribebody -> . START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody . BLOCKEND
 
-    START           shift and go to state 79
+    BLOCKEND        shift and go to state 79
 
-    automatondescribebody          shift and go to state 78
 
 state 77
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields . PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (32) automatondescribebody -> START . statedescription states TERMINAL BLOCKSTART termstates BLOCKEND
+    (33) statedescription -> . transition statedescription
+    (34) statedescription -> . transition
+    (28) transition -> . transitionterm ARROW ID
+    (29) transition -> . transitionkeyword ARROW ID
+    (30) transition -> . transitionkeyword ARROW transitionkeyword
+    (20) transitionterm -> . CHAR
+    (21) transitionterm -> . INT
+    (22) transitionterm -> . STRING
+    (23) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
+    (24) transitionkeyword -> . ELSE
+    (25) transitionkeyword -> . DEADEND
+    (26) transitionkeyword -> . ALPHABET
+    (27) transitionkeyword -> . ITSELF
 
-    PAREND          shift and go to state 80
+    CHAR            shift and go to state 39
+    INT             shift and go to state 40
+    STRING          shift and go to state 41
+    CLASSNAME       shift and go to state 37
+    ELSE            shift and go to state 84
+    DEADEND         shift and go to state 85
+    ALPHABET        shift and go to state 86
+    ITSELF          shift and go to state 87
 
+    statedescription               shift and go to state 80
+    transition                     shift and go to state 81
+    transitionterm                 shift and go to state 82
+    transitionkeyword              shift and go to state 83
 
 state 78
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody . BLOCKEND
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND . TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    BLOCKEND        shift and go to state 81
+    TYPIZATION      shift and go to state 88
 
 
 state 79
 
-    (26) automatondescribebody -> START . statedescription states TERMINAL BLOCKSTART termstates BLOCKEND
-    (27) statedescription -> . transition statedescription
-    (28) statedescription -> . transition
-    (22) transition -> . transitionterm ARROW ID
-    (23) transition -> . transitionkeyword ARROW ID
-    (24) transition -> . transitionkeyword ARROW transitionkeyword
-    (14) transitionterm -> . CHAR
-    (15) transitionterm -> . INT
-    (16) transitionterm -> . STRING
-    (17) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
-    (18) transitionkeyword -> . ELSE
-    (19) transitionkeyword -> . DEADEND
-    (20) transitionkeyword -> . ALPHABET
-    (21) transitionkeyword -> . ITSELF
+    (31) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .
 
-    CHAR            shift and go to state 41
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    CLASSNAME       shift and go to state 39
-    ELSE            shift and go to state 86
-    DEADEND         shift and go to state 87
-    ALPHABET        shift and go to state 88
-    ITSELF          shift and go to state 89
+    CLASS           reduce using rule 31 (automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .)
+    DEF             reduce using rule 31 (automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .)
+    $end            reduce using rule 31 (automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .)
 
-    statedescription               shift and go to state 82
-    transition                     shift and go to state 83
-    transitionterm                 shift and go to state 84
-    transitionkeyword              shift and go to state 85
 
 state 80
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND . TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (32) automatondescribebody -> START statedescription . states TERMINAL BLOCKSTART termstates BLOCKEND
+    (35) states -> . states ID statedescription
+    (36) states -> . ID statedescription
+    (37) states -> . empty
+    (6) empty -> .
 
-    TYPIZATION      shift and go to state 90
+  ! shift/reduce conflict for ID resolved as shift
+    ID              shift and go to state 90
+    TERMINAL        reduce using rule 6 (empty -> .)
 
+  ! ID              [ reduce using rule 6 (empty -> .) ]
+
+    states                         shift and go to state 89
+    empty                          shift and go to state 91
 
 state 81
 
-    (25) automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .
+    (33) statedescription -> transition . statedescription
+    (34) statedescription -> transition .
+    (33) statedescription -> . transition statedescription
+    (34) statedescription -> . transition
+    (28) transition -> . transitionterm ARROW ID
+    (29) transition -> . transitionkeyword ARROW ID
+    (30) transition -> . transitionkeyword ARROW transitionkeyword
+    (20) transitionterm -> . CHAR
+    (21) transitionterm -> . INT
+    (22) transitionterm -> . STRING
+    (23) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
+    (24) transitionkeyword -> . ELSE
+    (25) transitionkeyword -> . DEADEND
+    (26) transitionkeyword -> . ALPHABET
+    (27) transitionkeyword -> . ITSELF
 
-    CLASS           reduce using rule 25 (automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .)
-    DEF             reduce using rule 25 (automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .)
-    $end            reduce using rule 25 (automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND .)
+    ID              reduce using rule 34 (statedescription -> transition .)
+    TERMINAL        reduce using rule 34 (statedescription -> transition .)
+    BLOCKEND        reduce using rule 34 (statedescription -> transition .)
+    CHAR            shift and go to state 39
+    INT             shift and go to state 40
+    STRING          shift and go to state 41
+    CLASSNAME       shift and go to state 37
+    ELSE            shift and go to state 84
+    DEADEND         shift and go to state 85
+    ALPHABET        shift and go to state 86
+    ITSELF          shift and go to state 87
 
+    transition                     shift and go to state 81
+    statedescription               shift and go to state 92
+    transitionterm                 shift and go to state 82
+    transitionkeyword              shift and go to state 83
 
 state 82
 
-    (26) automatondescribebody -> START statedescription . states TERMINAL BLOCKSTART termstates BLOCKEND
-    (29) states -> . states ID statedescription
-    (30) states -> . ID statedescription
-    (31) states -> . empty
-    (54) empty -> .
+    (28) transition -> transitionterm . ARROW ID
 
-  ! shift/reduce conflict for ID resolved as shift
-    ID              shift and go to state 92
-    TERMINAL        reduce using rule 54 (empty -> .)
+    ARROW           shift and go to state 93
 
-  ! ID              [ reduce using rule 54 (empty -> .) ]
-
-    states                         shift and go to state 91
-    empty                          shift and go to state 93
 
 state 83
 
-    (27) statedescription -> transition . statedescription
-    (28) statedescription -> transition .
-    (27) statedescription -> . transition statedescription
-    (28) statedescription -> . transition
-    (22) transition -> . transitionterm ARROW ID
-    (23) transition -> . transitionkeyword ARROW ID
-    (24) transition -> . transitionkeyword ARROW transitionkeyword
-    (14) transitionterm -> . CHAR
-    (15) transitionterm -> . INT
-    (16) transitionterm -> . STRING
-    (17) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
-    (18) transitionkeyword -> . ELSE
-    (19) transitionkeyword -> . DEADEND
-    (20) transitionkeyword -> . ALPHABET
-    (21) transitionkeyword -> . ITSELF
+    (29) transition -> transitionkeyword . ARROW ID
+    (30) transition -> transitionkeyword . ARROW transitionkeyword
 
-    ID              reduce using rule 28 (statedescription -> transition .)
-    TERMINAL        reduce using rule 28 (statedescription -> transition .)
-    BLOCKEND        reduce using rule 28 (statedescription -> transition .)
-    CHAR            shift and go to state 41
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    CLASSNAME       shift and go to state 39
-    ELSE            shift and go to state 86
-    DEADEND         shift and go to state 87
-    ALPHABET        shift and go to state 88
-    ITSELF          shift and go to state 89
+    ARROW           shift and go to state 94
 
-    transition                     shift and go to state 83
-    statedescription               shift and go to state 94
-    transitionterm                 shift and go to state 84
-    transitionkeyword              shift and go to state 85
 
 state 84
 
-    (22) transition -> transitionterm . ARROW ID
+    (24) transitionkeyword -> ELSE .
 
-    ARROW           shift and go to state 95
+    ARROW           reduce using rule 24 (transitionkeyword -> ELSE .)
+    CHAR            reduce using rule 24 (transitionkeyword -> ELSE .)
+    INT             reduce using rule 24 (transitionkeyword -> ELSE .)
+    STRING          reduce using rule 24 (transitionkeyword -> ELSE .)
+    CLASSNAME       reduce using rule 24 (transitionkeyword -> ELSE .)
+    ELSE            reduce using rule 24 (transitionkeyword -> ELSE .)
+    DEADEND         reduce using rule 24 (transitionkeyword -> ELSE .)
+    ALPHABET        reduce using rule 24 (transitionkeyword -> ELSE .)
+    ITSELF          reduce using rule 24 (transitionkeyword -> ELSE .)
+    ID              reduce using rule 24 (transitionkeyword -> ELSE .)
+    TERMINAL        reduce using rule 24 (transitionkeyword -> ELSE .)
+    BLOCKEND        reduce using rule 24 (transitionkeyword -> ELSE .)
 
 
 state 85
 
-    (23) transition -> transitionkeyword . ARROW ID
-    (24) transition -> transitionkeyword . ARROW transitionkeyword
+    (25) transitionkeyword -> DEADEND .
 
-    ARROW           shift and go to state 96
+    ARROW           reduce using rule 25 (transitionkeyword -> DEADEND .)
+    CHAR            reduce using rule 25 (transitionkeyword -> DEADEND .)
+    INT             reduce using rule 25 (transitionkeyword -> DEADEND .)
+    STRING          reduce using rule 25 (transitionkeyword -> DEADEND .)
+    CLASSNAME       reduce using rule 25 (transitionkeyword -> DEADEND .)
+    ELSE            reduce using rule 25 (transitionkeyword -> DEADEND .)
+    DEADEND         reduce using rule 25 (transitionkeyword -> DEADEND .)
+    ALPHABET        reduce using rule 25 (transitionkeyword -> DEADEND .)
+    ITSELF          reduce using rule 25 (transitionkeyword -> DEADEND .)
+    ID              reduce using rule 25 (transitionkeyword -> DEADEND .)
+    TERMINAL        reduce using rule 25 (transitionkeyword -> DEADEND .)
+    BLOCKEND        reduce using rule 25 (transitionkeyword -> DEADEND .)
 
 
 state 86
 
-    (18) transitionkeyword -> ELSE .
+    (26) transitionkeyword -> ALPHABET .
 
-    ARROW           reduce using rule 18 (transitionkeyword -> ELSE .)
-    CHAR            reduce using rule 18 (transitionkeyword -> ELSE .)
-    INT             reduce using rule 18 (transitionkeyword -> ELSE .)
-    STRING          reduce using rule 18 (transitionkeyword -> ELSE .)
-    CLASSNAME       reduce using rule 18 (transitionkeyword -> ELSE .)
-    ELSE            reduce using rule 18 (transitionkeyword -> ELSE .)
-    DEADEND         reduce using rule 18 (transitionkeyword -> ELSE .)
-    ALPHABET        reduce using rule 18 (transitionkeyword -> ELSE .)
-    ITSELF          reduce using rule 18 (transitionkeyword -> ELSE .)
-    ID              reduce using rule 18 (transitionkeyword -> ELSE .)
-    TERMINAL        reduce using rule 18 (transitionkeyword -> ELSE .)
-    BLOCKEND        reduce using rule 18 (transitionkeyword -> ELSE .)
+    ARROW           reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    CHAR            reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    INT             reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    STRING          reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    CLASSNAME       reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    ELSE            reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    DEADEND         reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    ALPHABET        reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    ITSELF          reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    ID              reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    TERMINAL        reduce using rule 26 (transitionkeyword -> ALPHABET .)
+    BLOCKEND        reduce using rule 26 (transitionkeyword -> ALPHABET .)
 
 
 state 87
 
-    (19) transitionkeyword -> DEADEND .
+    (27) transitionkeyword -> ITSELF .
 
-    ARROW           reduce using rule 19 (transitionkeyword -> DEADEND .)
-    CHAR            reduce using rule 19 (transitionkeyword -> DEADEND .)
-    INT             reduce using rule 19 (transitionkeyword -> DEADEND .)
-    STRING          reduce using rule 19 (transitionkeyword -> DEADEND .)
-    CLASSNAME       reduce using rule 19 (transitionkeyword -> DEADEND .)
-    ELSE            reduce using rule 19 (transitionkeyword -> DEADEND .)
-    DEADEND         reduce using rule 19 (transitionkeyword -> DEADEND .)
-    ALPHABET        reduce using rule 19 (transitionkeyword -> DEADEND .)
-    ITSELF          reduce using rule 19 (transitionkeyword -> DEADEND .)
-    ID              reduce using rule 19 (transitionkeyword -> DEADEND .)
-    TERMINAL        reduce using rule 19 (transitionkeyword -> DEADEND .)
-    BLOCKEND        reduce using rule 19 (transitionkeyword -> DEADEND .)
+    ARROW           reduce using rule 27 (transitionkeyword -> ITSELF .)
+    CHAR            reduce using rule 27 (transitionkeyword -> ITSELF .)
+    INT             reduce using rule 27 (transitionkeyword -> ITSELF .)
+    STRING          reduce using rule 27 (transitionkeyword -> ITSELF .)
+    CLASSNAME       reduce using rule 27 (transitionkeyword -> ITSELF .)
+    ELSE            reduce using rule 27 (transitionkeyword -> ITSELF .)
+    DEADEND         reduce using rule 27 (transitionkeyword -> ITSELF .)
+    ALPHABET        reduce using rule 27 (transitionkeyword -> ITSELF .)
+    ITSELF          reduce using rule 27 (transitionkeyword -> ITSELF .)
+    ID              reduce using rule 27 (transitionkeyword -> ITSELF .)
+    TERMINAL        reduce using rule 27 (transitionkeyword -> ITSELF .)
+    BLOCKEND        reduce using rule 27 (transitionkeyword -> ITSELF .)
 
 
 state 88
 
-    (20) transitionkeyword -> ALPHABET .
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION . CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    ARROW           reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    CHAR            reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    INT             reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    STRING          reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    CLASSNAME       reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    ELSE            reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    DEADEND         reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    ALPHABET        reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    ITSELF          reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    ID              reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    TERMINAL        reduce using rule 20 (transitionkeyword -> ALPHABET .)
-    BLOCKEND        reduce using rule 20 (transitionkeyword -> ALPHABET .)
+    CLASSNAME       shift and go to state 95
 
 
 state 89
 
-    (21) transitionkeyword -> ITSELF .
+    (32) automatondescribebody -> START statedescription states . TERMINAL BLOCKSTART termstates BLOCKEND
+    (35) states -> states . ID statedescription
 
-    ARROW           reduce using rule 21 (transitionkeyword -> ITSELF .)
-    CHAR            reduce using rule 21 (transitionkeyword -> ITSELF .)
-    INT             reduce using rule 21 (transitionkeyword -> ITSELF .)
-    STRING          reduce using rule 21 (transitionkeyword -> ITSELF .)
-    CLASSNAME       reduce using rule 21 (transitionkeyword -> ITSELF .)
-    ELSE            reduce using rule 21 (transitionkeyword -> ITSELF .)
-    DEADEND         reduce using rule 21 (transitionkeyword -> ITSELF .)
-    ALPHABET        reduce using rule 21 (transitionkeyword -> ITSELF .)
-    ITSELF          reduce using rule 21 (transitionkeyword -> ITSELF .)
-    ID              reduce using rule 21 (transitionkeyword -> ITSELF .)
-    TERMINAL        reduce using rule 21 (transitionkeyword -> ITSELF .)
-    BLOCKEND        reduce using rule 21 (transitionkeyword -> ITSELF .)
+    TERMINAL        shift and go to state 96
+    ID              shift and go to state 97
 
 
 state 90
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION . CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (36) states -> ID . statedescription
+    (33) statedescription -> . transition statedescription
+    (34) statedescription -> . transition
+    (28) transition -> . transitionterm ARROW ID
+    (29) transition -> . transitionkeyword ARROW ID
+    (30) transition -> . transitionkeyword ARROW transitionkeyword
+    (20) transitionterm -> . CHAR
+    (21) transitionterm -> . INT
+    (22) transitionterm -> . STRING
+    (23) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
+    (24) transitionkeyword -> . ELSE
+    (25) transitionkeyword -> . DEADEND
+    (26) transitionkeyword -> . ALPHABET
+    (27) transitionkeyword -> . ITSELF
 
-    CLASSNAME       shift and go to state 97
+    CHAR            shift and go to state 39
+    INT             shift and go to state 40
+    STRING          shift and go to state 41
+    CLASSNAME       shift and go to state 37
+    ELSE            shift and go to state 84
+    DEADEND         shift and go to state 85
+    ALPHABET        shift and go to state 86
+    ITSELF          shift and go to state 87
 
+    statedescription               shift and go to state 98
+    transition                     shift and go to state 81
+    transitionterm                 shift and go to state 82
+    transitionkeyword              shift and go to state 83
 
 state 91
 
-    (26) automatondescribebody -> START statedescription states . TERMINAL BLOCKSTART termstates BLOCKEND
-    (29) states -> states . ID statedescription
+    (37) states -> empty .
 
-    TERMINAL        shift and go to state 98
-    ID              shift and go to state 99
+    TERMINAL        reduce using rule 37 (states -> empty .)
+    ID              reduce using rule 37 (states -> empty .)
 
 
 state 92
 
-    (30) states -> ID . statedescription
-    (27) statedescription -> . transition statedescription
-    (28) statedescription -> . transition
-    (22) transition -> . transitionterm ARROW ID
-    (23) transition -> . transitionkeyword ARROW ID
-    (24) transition -> . transitionkeyword ARROW transitionkeyword
-    (14) transitionterm -> . CHAR
-    (15) transitionterm -> . INT
-    (16) transitionterm -> . STRING
-    (17) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
-    (18) transitionkeyword -> . ELSE
-    (19) transitionkeyword -> . DEADEND
-    (20) transitionkeyword -> . ALPHABET
-    (21) transitionkeyword -> . ITSELF
+    (33) statedescription -> transition statedescription .
 
-    CHAR            shift and go to state 41
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    CLASSNAME       shift and go to state 39
-    ELSE            shift and go to state 86
-    DEADEND         shift and go to state 87
-    ALPHABET        shift and go to state 88
-    ITSELF          shift and go to state 89
+    ID              reduce using rule 33 (statedescription -> transition statedescription .)
+    TERMINAL        reduce using rule 33 (statedescription -> transition statedescription .)
+    BLOCKEND        reduce using rule 33 (statedescription -> transition statedescription .)
 
-    statedescription               shift and go to state 100
-    transition                     shift and go to state 83
-    transitionterm                 shift and go to state 84
-    transitionkeyword              shift and go to state 85
 
 state 93
 
-    (31) states -> empty .
+    (28) transition -> transitionterm ARROW . ID
 
-    TERMINAL        reduce using rule 31 (states -> empty .)
-    ID              reduce using rule 31 (states -> empty .)
+    ID              shift and go to state 99
 
 
 state 94
 
-    (27) statedescription -> transition statedescription .
+    (29) transition -> transitionkeyword ARROW . ID
+    (30) transition -> transitionkeyword ARROW . transitionkeyword
+    (24) transitionkeyword -> . ELSE
+    (25) transitionkeyword -> . DEADEND
+    (26) transitionkeyword -> . ALPHABET
+    (27) transitionkeyword -> . ITSELF
 
-    ID              reduce using rule 27 (statedescription -> transition statedescription .)
-    TERMINAL        reduce using rule 27 (statedescription -> transition statedescription .)
-    BLOCKEND        reduce using rule 27 (statedescription -> transition statedescription .)
+    ID              shift and go to state 101
+    ELSE            shift and go to state 84
+    DEADEND         shift and go to state 85
+    ALPHABET        shift and go to state 86
+    ITSELF          shift and go to state 87
 
+    transitionkeyword              shift and go to state 100
 
 state 95
 
-    (22) transition -> transitionterm ARROW . ID
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME . BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    ID              shift and go to state 101
+    BLOCKSTART      shift and go to state 102
 
 
 state 96
 
-    (23) transition -> transitionkeyword ARROW . ID
-    (24) transition -> transitionkeyword ARROW . transitionkeyword
-    (18) transitionkeyword -> . ELSE
-    (19) transitionkeyword -> . DEADEND
-    (20) transitionkeyword -> . ALPHABET
-    (21) transitionkeyword -> . ITSELF
+    (32) automatondescribebody -> START statedescription states TERMINAL . BLOCKSTART termstates BLOCKEND
 
-    ID              shift and go to state 103
-    ELSE            shift and go to state 86
-    DEADEND         shift and go to state 87
-    ALPHABET        shift and go to state 88
-    ITSELF          shift and go to state 89
+    BLOCKSTART      shift and go to state 103
 
-    transitionkeyword              shift and go to state 102
 
 state 97
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME . BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND
+    (35) states -> states ID . statedescription
+    (33) statedescription -> . transition statedescription
+    (34) statedescription -> . transition
+    (28) transition -> . transitionterm ARROW ID
+    (29) transition -> . transitionkeyword ARROW ID
+    (30) transition -> . transitionkeyword ARROW transitionkeyword
+    (20) transitionterm -> . CHAR
+    (21) transitionterm -> . INT
+    (22) transitionterm -> . STRING
+    (23) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
+    (24) transitionkeyword -> . ELSE
+    (25) transitionkeyword -> . DEADEND
+    (26) transitionkeyword -> . ALPHABET
+    (27) transitionkeyword -> . ITSELF
 
-    BLOCKSTART      shift and go to state 104
+    CHAR            shift and go to state 39
+    INT             shift and go to state 40
+    STRING          shift and go to state 41
+    CLASSNAME       shift and go to state 37
+    ELSE            shift and go to state 84
+    DEADEND         shift and go to state 85
+    ALPHABET        shift and go to state 86
+    ITSELF          shift and go to state 87
 
+    statedescription               shift and go to state 104
+    transition                     shift and go to state 81
+    transitionterm                 shift and go to state 82
+    transitionkeyword              shift and go to state 83
 
 state 98
 
-    (26) automatondescribebody -> START statedescription states TERMINAL . BLOCKSTART termstates BLOCKEND
+    (36) states -> ID statedescription .
 
-    BLOCKSTART      shift and go to state 105
+    TERMINAL        reduce using rule 36 (states -> ID statedescription .)
+    ID              reduce using rule 36 (states -> ID statedescription .)
 
 
 state 99
 
-    (29) states -> states ID . statedescription
-    (27) statedescription -> . transition statedescription
-    (28) statedescription -> . transition
-    (22) transition -> . transitionterm ARROW ID
-    (23) transition -> . transitionkeyword ARROW ID
-    (24) transition -> . transitionkeyword ARROW transitionkeyword
-    (14) transitionterm -> . CHAR
-    (15) transitionterm -> . INT
-    (16) transitionterm -> . STRING
-    (17) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
-    (18) transitionkeyword -> . ELSE
-    (19) transitionkeyword -> . DEADEND
-    (20) transitionkeyword -> . ALPHABET
-    (21) transitionkeyword -> . ITSELF
+    (28) transition -> transitionterm ARROW ID .
 
-    CHAR            shift and go to state 41
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    CLASSNAME       shift and go to state 39
-    ELSE            shift and go to state 86
-    DEADEND         shift and go to state 87
-    ALPHABET        shift and go to state 88
-    ITSELF          shift and go to state 89
+    CHAR            reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    INT             reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    STRING          reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    CLASSNAME       reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    ELSE            reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    DEADEND         reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    ALPHABET        reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    ITSELF          reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    ID              reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    TERMINAL        reduce using rule 28 (transition -> transitionterm ARROW ID .)
+    BLOCKEND        reduce using rule 28 (transition -> transitionterm ARROW ID .)
 
-    statedescription               shift and go to state 106
-    transition                     shift and go to state 83
-    transitionterm                 shift and go to state 84
-    transitionkeyword              shift and go to state 85
 
 state 100
 
-    (30) states -> ID statedescription .
+    (30) transition -> transitionkeyword ARROW transitionkeyword .
 
-    TERMINAL        reduce using rule 30 (states -> ID statedescription .)
-    ID              reduce using rule 30 (states -> ID statedescription .)
+    CHAR            reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    INT             reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    STRING          reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    CLASSNAME       reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    ELSE            reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    DEADEND         reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    ALPHABET        reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    ITSELF          reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    ID              reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    TERMINAL        reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
+    BLOCKEND        reduce using rule 30 (transition -> transitionkeyword ARROW transitionkeyword .)
 
 
 state 101
 
-    (22) transition -> transitionterm ARROW ID .
+    (29) transition -> transitionkeyword ARROW ID .
 
-    CHAR            reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    INT             reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    STRING          reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    CLASSNAME       reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    ELSE            reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    DEADEND         reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    ALPHABET        reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    ITSELF          reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    ID              reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    TERMINAL        reduce using rule 22 (transition -> transitionterm ARROW ID .)
-    BLOCKEND        reduce using rule 22 (transition -> transitionterm ARROW ID .)
+    CHAR            reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    INT             reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    STRING          reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    CLASSNAME       reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    ELSE            reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    DEADEND         reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    ALPHABET        reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    ITSELF          reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    ID              reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    TERMINAL        reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
+    BLOCKEND        reduce using rule 29 (transition -> transitionkeyword ARROW ID .)
 
 
 state 102
 
-    (24) transition -> transitionkeyword ARROW transitionkeyword .
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART . RETURN PARSTART logicoperations PAREND BLOCKEND
 
-    CHAR            reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    INT             reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    STRING          reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    CLASSNAME       reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    ELSE            reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    DEADEND         reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    ALPHABET        reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    ITSELF          reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    ID              reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    TERMINAL        reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
-    BLOCKEND        reduce using rule 24 (transition -> transitionkeyword ARROW transitionkeyword .)
+    RETURN          shift and go to state 105
 
 
 state 103
 
-    (23) transition -> transitionkeyword ARROW ID .
+    (32) automatondescribebody -> START statedescription states TERMINAL BLOCKSTART . termstates BLOCKEND
+    (38) termstates -> . termstates ID statedescription
+    (39) termstates -> . ID statedescription
+    (40) termstates -> . empty
+    (6) empty -> .
 
-    CHAR            reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    INT             reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    STRING          reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    CLASSNAME       reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    ELSE            reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    DEADEND         reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    ALPHABET        reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    ITSELF          reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    ID              reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    TERMINAL        reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
-    BLOCKEND        reduce using rule 23 (transition -> transitionkeyword ARROW ID .)
+  ! shift/reduce conflict for ID resolved as shift
+    ID              shift and go to state 107
+    BLOCKEND        reduce using rule 6 (empty -> .)
 
+  ! ID              [ reduce using rule 6 (empty -> .) ]
+
+    termstates                     shift and go to state 106
+    empty                          shift and go to state 108
 
 state 104
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART . RETURN PARSTART logicoperations PAREND BLOCKEND
+    (35) states -> states ID statedescription .
 
-    RETURN          shift and go to state 107
+    TERMINAL        reduce using rule 35 (states -> states ID statedescription .)
+    ID              reduce using rule 35 (states -> states ID statedescription .)
 
 
 state 105
 
-    (26) automatondescribebody -> START statedescription states TERMINAL BLOCKSTART . termstates BLOCKEND
-    (32) termstates -> . termstates ID statedescription
-    (33) termstates -> . ID statedescription
-    (34) termstates -> . empty
-    (54) empty -> .
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN . PARSTART logicoperations PAREND BLOCKEND
 
-  ! shift/reduce conflict for ID resolved as shift
-    ID              shift and go to state 109
-    BLOCKEND        reduce using rule 54 (empty -> .)
+    PARSTART        shift and go to state 109
 
-  ! ID              [ reduce using rule 54 (empty -> .) ]
-
-    termstates                     shift and go to state 108
-    empty                          shift and go to state 110
 
 state 106
 
-    (29) states -> states ID statedescription .
+    (32) automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates . BLOCKEND
+    (38) termstates -> termstates . ID statedescription
 
-    TERMINAL        reduce using rule 29 (states -> states ID statedescription .)
-    ID              reduce using rule 29 (states -> states ID statedescription .)
+    BLOCKEND        shift and go to state 110
+    ID              shift and go to state 111
 
 
 state 107
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN . PARSTART logicoperations PAREND BLOCKEND
+    (39) termstates -> ID . statedescription
+    (33) statedescription -> . transition statedescription
+    (34) statedescription -> . transition
+    (28) transition -> . transitionterm ARROW ID
+    (29) transition -> . transitionkeyword ARROW ID
+    (30) transition -> . transitionkeyword ARROW transitionkeyword
+    (20) transitionterm -> . CHAR
+    (21) transitionterm -> . INT
+    (22) transitionterm -> . STRING
+    (23) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
+    (24) transitionkeyword -> . ELSE
+    (25) transitionkeyword -> . DEADEND
+    (26) transitionkeyword -> . ALPHABET
+    (27) transitionkeyword -> . ITSELF
 
-    PARSTART        shift and go to state 111
+    CHAR            shift and go to state 39
+    INT             shift and go to state 40
+    STRING          shift and go to state 41
+    CLASSNAME       shift and go to state 37
+    ELSE            shift and go to state 84
+    DEADEND         shift and go to state 85
+    ALPHABET        shift and go to state 86
+    ITSELF          shift and go to state 87
 
+    statedescription               shift and go to state 112
+    transition                     shift and go to state 81
+    transitionterm                 shift and go to state 82
+    transitionkeyword              shift and go to state 83
 
 state 108
 
-    (26) automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates . BLOCKEND
-    (32) termstates -> termstates . ID statedescription
+    (40) termstates -> empty .
 
-    BLOCKEND        shift and go to state 112
-    ID              shift and go to state 113
+    BLOCKEND        reduce using rule 40 (termstates -> empty .)
+    ID              reduce using rule 40 (termstates -> empty .)
 
 
 state 109
 
-    (33) termstates -> ID . statedescription
-    (27) statedescription -> . transition statedescription
-    (28) statedescription -> . transition
-    (22) transition -> . transitionterm ARROW ID
-    (23) transition -> . transitionkeyword ARROW ID
-    (24) transition -> . transitionkeyword ARROW transitionkeyword
-    (14) transitionterm -> . CHAR
-    (15) transitionterm -> . INT
-    (16) transitionterm -> . STRING
-    (17) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
-    (18) transitionkeyword -> . ELSE
-    (19) transitionkeyword -> . DEADEND
-    (20) transitionkeyword -> . ALPHABET
-    (21) transitionkeyword -> . ITSELF
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART . logicoperations PAREND BLOCKEND
+    (50) logicoperations -> . compareoperation
+    (51) logicoperations -> . PARSTART logicoperations PAREND
+    (52) logicoperations -> . logicoperations LOGICOPERATOR PARSTART compareoperation PAREND
+    (49) compareoperation -> . ID METHOD COMPAREOPERATOR ID METHOD
 
-    CHAR            shift and go to state 41
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    CLASSNAME       shift and go to state 39
-    ELSE            shift and go to state 86
-    DEADEND         shift and go to state 87
-    ALPHABET        shift and go to state 88
-    ITSELF          shift and go to state 89
+    PARSTART        shift and go to state 114
+    ID              shift and go to state 113
 
-    statedescription               shift and go to state 114
-    transition                     shift and go to state 83
-    transitionterm                 shift and go to state 84
-    transitionkeyword              shift and go to state 85
+    logicoperations                shift and go to state 115
+    compareoperation               shift and go to state 116
 
 state 110
 
-    (34) termstates -> empty .
+    (32) automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND .
 
-    BLOCKEND        reduce using rule 34 (termstates -> empty .)
-    ID              reduce using rule 34 (termstates -> empty .)
+    BLOCKEND        reduce using rule 32 (automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND .)
 
 
 state 111
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART . logicoperations PAREND BLOCKEND
-    (44) logicoperations -> . compareoperation
-    (45) logicoperations -> . PARSTART logicoperations PAREND
-    (46) logicoperations -> . logicoperations LOGICOPERATOR PARSTART compareoperation PAREND
-    (43) compareoperation -> . ID METHOD COMPAREOPERATOR ID METHOD
+    (38) termstates -> termstates ID . statedescription
+    (33) statedescription -> . transition statedescription
+    (34) statedescription -> . transition
+    (28) transition -> . transitionterm ARROW ID
+    (29) transition -> . transitionkeyword ARROW ID
+    (30) transition -> . transitionkeyword ARROW transitionkeyword
+    (20) transitionterm -> . CHAR
+    (21) transitionterm -> . INT
+    (22) transitionterm -> . STRING
+    (23) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
+    (24) transitionkeyword -> . ELSE
+    (25) transitionkeyword -> . DEADEND
+    (26) transitionkeyword -> . ALPHABET
+    (27) transitionkeyword -> . ITSELF
 
-    PARSTART        shift and go to state 116
-    ID              shift and go to state 115
+    CHAR            shift and go to state 39
+    INT             shift and go to state 40
+    STRING          shift and go to state 41
+    CLASSNAME       shift and go to state 37
+    ELSE            shift and go to state 84
+    DEADEND         shift and go to state 85
+    ALPHABET        shift and go to state 86
+    ITSELF          shift and go to state 87
 
-    logicoperations                shift and go to state 117
-    compareoperation               shift and go to state 118
+    statedescription               shift and go to state 117
+    transition                     shift and go to state 81
+    transitionterm                 shift and go to state 82
+    transitionkeyword              shift and go to state 83
 
 state 112
 
-    (26) automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND .
+    (39) termstates -> ID statedescription .
 
-    BLOCKEND        reduce using rule 26 (automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND .)
+    BLOCKEND        reduce using rule 39 (termstates -> ID statedescription .)
+    ID              reduce using rule 39 (termstates -> ID statedescription .)
 
 
 state 113
 
-    (32) termstates -> termstates ID . statedescription
-    (27) statedescription -> . transition statedescription
-    (28) statedescription -> . transition
-    (22) transition -> . transitionterm ARROW ID
-    (23) transition -> . transitionkeyword ARROW ID
-    (24) transition -> . transitionkeyword ARROW transitionkeyword
-    (14) transitionterm -> . CHAR
-    (15) transitionterm -> . INT
-    (16) transitionterm -> . STRING
-    (17) transitionterm -> . CLASSNAME PARSTART enumeration PAREND
-    (18) transitionkeyword -> . ELSE
-    (19) transitionkeyword -> . DEADEND
-    (20) transitionkeyword -> . ALPHABET
-    (21) transitionkeyword -> . ITSELF
+    (49) compareoperation -> ID . METHOD COMPAREOPERATOR ID METHOD
 
-    CHAR            shift and go to state 41
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    CLASSNAME       shift and go to state 39
-    ELSE            shift and go to state 86
-    DEADEND         shift and go to state 87
-    ALPHABET        shift and go to state 88
-    ITSELF          shift and go to state 89
+    METHOD          shift and go to state 118
 
-    statedescription               shift and go to state 119
-    transition                     shift and go to state 83
-    transitionterm                 shift and go to state 84
-    transitionkeyword              shift and go to state 85
 
 state 114
 
-    (33) termstates -> ID statedescription .
+    (51) logicoperations -> PARSTART . logicoperations PAREND
+    (50) logicoperations -> . compareoperation
+    (51) logicoperations -> . PARSTART logicoperations PAREND
+    (52) logicoperations -> . logicoperations LOGICOPERATOR PARSTART compareoperation PAREND
+    (49) compareoperation -> . ID METHOD COMPAREOPERATOR ID METHOD
 
-    BLOCKEND        reduce using rule 33 (termstates -> ID statedescription .)
-    ID              reduce using rule 33 (termstates -> ID statedescription .)
+    PARSTART        shift and go to state 114
+    ID              shift and go to state 113
 
+    logicoperations                shift and go to state 119
+    compareoperation               shift and go to state 116
 
 state 115
 
-    (43) compareoperation -> ID . METHOD COMPAREOPERATOR ID METHOD
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations . PAREND BLOCKEND
+    (52) logicoperations -> logicoperations . LOGICOPERATOR PARSTART compareoperation PAREND
 
-    METHOD          shift and go to state 120
+    PAREND          shift and go to state 120
+    LOGICOPERATOR   shift and go to state 121
 
 
 state 116
 
-    (45) logicoperations -> PARSTART . logicoperations PAREND
-    (44) logicoperations -> . compareoperation
-    (45) logicoperations -> . PARSTART logicoperations PAREND
-    (46) logicoperations -> . logicoperations LOGICOPERATOR PARSTART compareoperation PAREND
-    (43) compareoperation -> . ID METHOD COMPAREOPERATOR ID METHOD
+    (50) logicoperations -> compareoperation .
 
-    PARSTART        shift and go to state 116
-    ID              shift and go to state 115
+    PAREND          reduce using rule 50 (logicoperations -> compareoperation .)
+    LOGICOPERATOR   reduce using rule 50 (logicoperations -> compareoperation .)
 
-    logicoperations                shift and go to state 121
-    compareoperation               shift and go to state 118
 
 state 117
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations . PAREND BLOCKEND
-    (46) logicoperations -> logicoperations . LOGICOPERATOR PARSTART compareoperation PAREND
+    (38) termstates -> termstates ID statedescription .
 
-    PAREND          shift and go to state 122
-    LOGICOPERATOR   shift and go to state 123
+    BLOCKEND        reduce using rule 38 (termstates -> termstates ID statedescription .)
+    ID              reduce using rule 38 (termstates -> termstates ID statedescription .)
 
 
 state 118
 
-    (44) logicoperations -> compareoperation .
+    (49) compareoperation -> ID METHOD . COMPAREOPERATOR ID METHOD
 
-    PAREND          reduce using rule 44 (logicoperations -> compareoperation .)
-    LOGICOPERATOR   reduce using rule 44 (logicoperations -> compareoperation .)
+    COMPAREOPERATOR shift and go to state 122
 
 
 state 119
 
-    (32) termstates -> termstates ID statedescription .
+    (51) logicoperations -> PARSTART logicoperations . PAREND
+    (52) logicoperations -> logicoperations . LOGICOPERATOR PARSTART compareoperation PAREND
 
-    BLOCKEND        reduce using rule 32 (termstates -> termstates ID statedescription .)
-    ID              reduce using rule 32 (termstates -> termstates ID statedescription .)
+    PAREND          shift and go to state 123
+    LOGICOPERATOR   shift and go to state 121
 
 
 state 120
 
-    (43) compareoperation -> ID METHOD . COMPAREOPERATOR ID METHOD
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND . BLOCKEND
 
-    COMPAREOPERATOR shift and go to state 124
+    BLOCKEND        shift and go to state 124
 
 
 state 121
 
-    (45) logicoperations -> PARSTART logicoperations . PAREND
-    (46) logicoperations -> logicoperations . LOGICOPERATOR PARSTART compareoperation PAREND
+    (52) logicoperations -> logicoperations LOGICOPERATOR . PARSTART compareoperation PAREND
 
-    PAREND          shift and go to state 125
-    LOGICOPERATOR   shift and go to state 123
+    PARSTART        shift and go to state 125
 
 
 state 122
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND . BLOCKEND
+    (49) compareoperation -> ID METHOD COMPAREOPERATOR . ID METHOD
 
-    BLOCKEND        shift and go to state 126
+    ID              shift and go to state 126
 
 
 state 123
 
-    (46) logicoperations -> logicoperations LOGICOPERATOR . PARSTART compareoperation PAREND
+    (51) logicoperations -> PARSTART logicoperations PAREND .
 
-    PARSTART        shift and go to state 127
+    PAREND          reduce using rule 51 (logicoperations -> PARSTART logicoperations PAREND .)
+    LOGICOPERATOR   reduce using rule 51 (logicoperations -> PARSTART logicoperations PAREND .)
 
 
 state 124
 
-    (43) compareoperation -> ID METHOD COMPAREOPERATOR . ID METHOD
+    (48) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND .
 
-    ID              shift and go to state 128
+    OVERRIDE        reduce using rule 48 (method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND .)
+    BLOCKEND        reduce using rule 48 (method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND .)
 
 
 state 125
 
-    (45) logicoperations -> PARSTART logicoperations PAREND .
+    (52) logicoperations -> logicoperations LOGICOPERATOR PARSTART . compareoperation PAREND
+    (49) compareoperation -> . ID METHOD COMPAREOPERATOR ID METHOD
 
-    PAREND          reduce using rule 45 (logicoperations -> PARSTART logicoperations PAREND .)
-    LOGICOPERATOR   reduce using rule 45 (logicoperations -> PARSTART logicoperations PAREND .)
+    ID              shift and go to state 113
 
+    compareoperation               shift and go to state 127
 
 state 126
 
-    (42) method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND .
+    (49) compareoperation -> ID METHOD COMPAREOPERATOR ID . METHOD
 
-    OVERRIDE        reduce using rule 42 (method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND .)
-    BLOCKEND        reduce using rule 42 (method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND .)
+    METHOD          shift and go to state 128
 
 
 state 127
 
-    (46) logicoperations -> logicoperations LOGICOPERATOR PARSTART . compareoperation PAREND
-    (43) compareoperation -> . ID METHOD COMPAREOPERATOR ID METHOD
+    (52) logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation . PAREND
 
-    ID              shift and go to state 115
+    PAREND          shift and go to state 129
 
-    compareoperation               shift and go to state 129
 
 state 128
 
-    (43) compareoperation -> ID METHOD COMPAREOPERATOR ID . METHOD
+    (49) compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD .
 
-    METHOD          shift and go to state 130
+    PAREND          reduce using rule 49 (compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD .)
+    LOGICOPERATOR   reduce using rule 49 (compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD .)
 
 
 state 129
 
-    (46) logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation . PAREND
+    (52) logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND .
 
-    PAREND          shift and go to state 131
-
-
-state 130
-
-    (43) compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD .
-
-    PAREND          reduce using rule 43 (compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD .)
-    LOGICOPERATOR   reduce using rule 43 (compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD .)
-
-
-state 131
-
-    (46) logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND .
-
-    PAREND          reduce using rule 46 (logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND .)
-    LOGICOPERATOR   reduce using rule 46 (logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND .)
+    PAREND          reduce using rule 52 (logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND .)
+    LOGICOPERATOR   reduce using rule 52 (logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PAREND in state 53 resolved as shift
-WARNING: shift/reduce conflict for ID in state 82 resolved as shift
-WARNING: shift/reduce conflict for ID in state 105 resolved as shift
+WARNING: shift/reduce conflict for PAREND in state 51 resolved as shift
+WARNING: shift/reduce conflict for ID in state 80 resolved as shift
+WARNING: shift/reduce conflict for ID in state 103 resolved as shift

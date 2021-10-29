@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'programscopeALPHABET ARROW BLOCKEND BLOCKSTART CHAR CLASS CLASSNAME COMMA COMPAREOPERATOR DEADEND DEF ELSE EQUALITY FROM FUN ID INT ITSELF LOGICOPERATOR METHOD OVERRIDE PAREND PARSTART RETURN START STRING TERMINAL TYPIZATIONalphabet : DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND\n                | DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND\n                | DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND\n                 enumeration : term\n                   | term COMMA enumeration\n                   term : CHAR\n            | INT\n            | STRING\n            | ID\n            | CLASSNAME PARSTART enumeration PAREND\n            alphabetdescribebody : paramsdescribe\n                            | paramsdescribe COMMA alphabetdescribebody\n                            paramsdescribe : enumeration FROM IDtransitionterm : CHAR\n                      | INT\n                      | STRING\n                      | CLASSNAME PARSTART enumeration PAREND\n                      transitionkeyword : ELSE\n                         | DEADEND\n                         | ALPHABET\n                         | ITSELF\n                         transition : transitionterm ARROW ID\n                  | transitionkeyword ARROW ID\n                  | transitionkeyword ARROW transitionkeyword\n                  automaton : DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKENDautomatondescribebody : START statedescription states TERMINAL BLOCKSTART termstates BLOCKENDstatedescription : transition statedescription\n                        | transition\n                        states : states ID statedescription\n              | ID statedescription\n              | empty\n              termstates : termstates ID statedescription\n                  | ID statedescription\n                  | empty\n                  classdef : CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKENDfield : ID TYPIZATION CLASSNAME\n             | ID TYPIZATION CLASSNAME EQUALITY transitionterm\n             fields : field\n              | field COMMA fields\n              classbody : method\n                 | method classbody\n                 method : OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKENDcompareoperation : ID METHOD COMPAREOPERATOR ID METHODlogicoperations : compareoperation\n                       | PARSTART logicoperations PAREND\n                       | logicoperations LOGICOPERATOR PARSTART compareoperation PAREND\n                       programscope : expressions\n                    | empty\n                    expressions : expression\n                   | expression expressionsexpression : classdef\n                  | automaton\n                  | alphabet\n                  empty :'
+_lr_signature = 'expressionsALPHABET ARROW BLOCKEND BLOCKSTART CHAR CLASS CLASSNAME COMMA COMPAREOPERATOR DEADEND DEF ELSE EQUALITY FROM FUN ID INT ITSELF LOGICOPERATOR METHOD OVERRIDE PAREND PARSTART RETURN START STRING TERMINAL TYPIZATIONexpressions : expression\n                   | expression expressionsexpression : classdef\n                  | automaton\n                  | alphabet\n                  empty :alphabet : DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND\n                | DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND\n                | DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND\n                 enumeration : term\n                   | term COMMA enumeration\n                   term : CHAR\n            | INT\n            | STRING\n            | ID\n            | CLASSNAME PARSTART enumeration PAREND\n            alphabetdescribebody : paramsdescribe\n                            | paramsdescribe COMMA alphabetdescribebody\n                            paramsdescribe : enumeration FROM IDtransitionterm : CHAR\n                      | INT\n                      | STRING\n                      | CLASSNAME PARSTART enumeration PAREND\n                      transitionkeyword : ELSE\n                         | DEADEND\n                         | ALPHABET\n                         | ITSELF\n                         transition : transitionterm ARROW ID\n                  | transitionkeyword ARROW ID\n                  | transitionkeyword ARROW transitionkeyword\n                  automaton : DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKENDautomatondescribebody : START statedescription states TERMINAL BLOCKSTART termstates BLOCKENDstatedescription : transition statedescription\n                        | transition\n                        states : states ID statedescription\n              | ID statedescription\n              | empty\n              termstates : termstates ID statedescription\n                  | ID statedescription\n                  | empty\n                  classdef : CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKENDfield : ID TYPIZATION CLASSNAME\n             | ID TYPIZATION CLASSNAME EQUALITY transitionterm\n             fields : field\n              | field COMMA fields\n              classbody : method\n                 | method classbody\n                 method : OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKENDcompareoperation : ID METHOD COMPAREOPERATOR ID METHODlogicoperations : compareoperation\n                       | PARSTART logicoperations PAREND\n                       | logicoperations LOGICOPERATOR PARSTART compareoperation PAREND\n                       '
     
-_lr_action_items = {'$end':([0,1,2,3,4,5,6,7,10,47,60,65,66,81,],[-54,0,-47,-48,-49,-51,-52,-53,-50,-1,-35,-2,-3,-25,]),'CLASS':([0,4,5,6,7,47,60,65,66,81,],[8,8,-51,-52,-53,-1,-35,-2,-3,-25,]),'DEF':([0,4,5,6,7,47,60,65,66,81,],[9,9,-51,-52,-53,-1,-35,-2,-3,-25,]),'CLASSNAME':([8,14,21,22,23,27,29,44,45,46,48,52,67,79,83,86,87,88,89,90,92,99,101,102,103,109,113,],[11,18,25,26,28,32,39,32,32,32,32,32,32,39,39,-18,-19,-20,-21,97,39,39,-22,-24,-23,39,39,]),'ID':([9,13,20,27,44,45,46,48,52,62,67,68,75,82,83,86,87,88,89,91,93,94,95,96,100,101,102,103,105,106,108,110,111,114,116,119,124,127,],[12,17,17,31,53,31,31,31,31,70,31,74,17,92,-28,-18,-19,-20,-21,99,-31,-27,101,103,-30,-22,-24,-23,109,-29,113,-34,115,-33,115,-32,128,115,]),'PARSTART':([11,30,32,39,70,107,111,116,123,],[13,44,46,52,75,111,116,116,127,]),'TYPIZATION':([12,17,19,80,],[14,21,23,90,]),'PAREND':([15,16,24,25,31,34,35,36,37,40,41,42,43,53,54,58,59,63,69,71,77,117,118,121,125,129,130,131,],[19,-38,-39,-36,-9,-4,-6,-7,-8,-37,-14,-15,-16,64,65,69,-5,71,-10,-17,80,122,-44,125,-45,131,-43,-46,]),'COMMA':([16,25,31,34,35,36,37,40,41,42,43,53,56,69,71,74,],[20,-36,-9,48,-6,-7,-8,-37,-14,-15,-16,-9,67,-10,-17,-13,]),'EQUALITY':([18,25,],[22,29,]),'BLOCKSTART':([22,28,30,72,97,98,],[27,38,45,76,104,105,]),'METHOD':([26,64,115,128,],[30,72,120,130,]),'CHAR':([27,29,44,45,46,48,52,67,79,83,86,87,88,89,92,99,101,102,103,109,113,],[35,41,35,35,35,35,35,35,41,41,-18,-19,-20,-21,41,41,-22,-24,-23,41,41,]),'INT':([27,29,44,45,46,48,52,67,79,83,86,87,88,89,92,99,101,102,103,109,113,],[36,42,36,36,36,36,36,36,42,42,-18,-19,-20,-21,42,42,-22,-24,-23,42,42,]),'STRING':([27,29,44,45,46,48,52,67,79,83,86,87,88,89,92,99,101,102,103,109,113,],[37,43,37,37,37,37,37,37,43,43,-18,-19,-20,-21,43,43,-22,-24,-23,43,43,]),'BLOCKEND':([31,33,34,35,36,37,49,50,55,56,59,61,69,73,74,78,83,86,87,88,89,94,101,102,103,105,108,110,112,114,119,122,126,],[-9,47,-4,-6,-7,-8,60,-40,66,-11,-5,-41,-10,-12,-13,81,-28,-18,-19,-20,-21,-27,-22,-24,-23,-54,112,-34,-26,-33,-32,126,-42,]),'FROM':([31,34,35,36,37,57,59,69,],[-9,-4,-6,-7,-8,68,-5,-10,]),'OVERRIDE':([38,50,126,],[51,51,-42,]),'ARROW':([41,42,43,71,84,85,86,87,88,89,],[-14,-15,-16,-17,95,96,-18,-19,-20,-21,]),'FUN':([51,],[62,]),'START':([76,],[79,]),'ELSE':([79,83,86,87,88,89,92,96,99,101,102,103,109,113,],[86,86,-18,-19,-20,-21,86,86,86,-22,-24,-23,86,86,]),'DEADEND':([79,83,86,87,88,89,92,96,99,101,102,103,109,113,],[87,87,-18,-19,-20,-21,87,87,87,-22,-24,-23,87,87,]),'ALPHABET':([79,83,86,87,88,89,92,96,99,101,102,103,109,113,],[88,88,-18,-19,-20,-21,88,88,88,-22,-24,-23,88,88,]),'ITSELF':([79,83,86,87,88,89,92,96,99,101,102,103,109,113,],[89,89,-18,-19,-20,-21,89,89,89,-22,-24,-23,89,89,]),'TERMINAL':([82,83,86,87,88,89,91,93,94,100,101,102,103,106,],[-54,-28,-18,-19,-20,-21,98,-31,-27,-30,-22,-24,-23,-29,]),'RETURN':([104,],[107,]),'LOGICOPERATOR':([117,118,121,125,130,131,],[123,-44,123,-45,-43,-46,]),'COMPAREOPERATOR':([120,],[124,]),}
+_lr_action_items = {'CLASS':([0,2,3,4,5,45,58,63,64,79,],[6,6,-3,-4,-5,-7,-41,-8,-9,-31,]),'DEF':([0,2,3,4,5,45,58,63,64,79,],[7,7,-3,-4,-5,-7,-41,-8,-9,-31,]),'$end':([1,2,3,4,5,8,45,58,63,64,79,],[0,-1,-3,-4,-5,-2,-7,-41,-8,-9,-31,]),'CLASSNAME':([6,12,19,20,21,25,27,42,43,44,46,50,65,77,81,84,85,86,87,88,90,97,99,100,101,107,111,],[9,16,23,24,26,30,37,30,30,30,30,30,30,37,37,-24,-25,-26,-27,95,37,37,-28,-30,-29,37,37,]),'ID':([7,11,18,25,42,43,44,46,50,60,65,66,73,80,81,84,85,86,87,89,91,92,93,94,98,99,100,101,103,104,106,108,109,112,114,117,122,125,],[10,15,15,29,51,29,29,29,29,68,29,72,15,90,-34,-24,-25,-26,-27,97,-37,-33,99,101,-36,-28,-30,-29,107,-35,111,-40,113,-39,113,-38,126,113,]),'PARSTART':([9,28,30,37,68,105,109,114,121,],[11,42,44,50,73,109,114,114,125,]),'TYPIZATION':([10,15,17,78,],[12,19,21,88,]),'PAREND':([13,14,22,23,29,32,33,34,35,38,39,40,41,51,52,56,57,61,67,69,75,115,116,119,123,127,128,129,],[17,-44,-45,-42,-15,-10,-12,-13,-14,-43,-20,-21,-22,62,63,67,-11,69,-16,-23,78,120,-50,123,-51,129,-49,-52,]),'COMMA':([14,23,29,32,33,34,35,38,39,40,41,51,54,67,69,72,],[18,-42,-15,46,-12,-13,-14,-43,-20,-21,-22,-15,65,-16,-23,-19,]),'EQUALITY':([16,23,],[20,27,]),'BLOCKSTART':([20,26,28,70,95,96,],[25,36,43,74,102,103,]),'METHOD':([24,62,113,126,],[28,70,118,128,]),'CHAR':([25,27,42,43,44,46,50,65,77,81,84,85,86,87,90,97,99,100,101,107,111,],[33,39,33,33,33,33,33,33,39,39,-24,-25,-26,-27,39,39,-28,-30,-29,39,39,]),'INT':([25,27,42,43,44,46,50,65,77,81,84,85,86,87,90,97,99,100,101,107,111,],[34,40,34,34,34,34,34,34,40,40,-24,-25,-26,-27,40,40,-28,-30,-29,40,40,]),'STRING':([25,27,42,43,44,46,50,65,77,81,84,85,86,87,90,97,99,100,101,107,111,],[35,41,35,35,35,35,35,35,41,41,-24,-25,-26,-27,41,41,-28,-30,-29,41,41,]),'BLOCKEND':([29,31,32,33,34,35,47,48,53,54,57,59,67,71,72,76,81,84,85,86,87,92,99,100,101,103,106,108,110,112,117,120,124,],[-15,45,-10,-12,-13,-14,58,-46,64,-17,-11,-47,-16,-18,-19,79,-34,-24,-25,-26,-27,-33,-28,-30,-29,-6,110,-40,-32,-39,-38,124,-48,]),'FROM':([29,32,33,34,35,55,57,67,],[-15,-10,-12,-13,-14,66,-11,-16,]),'OVERRIDE':([36,48,124,],[49,49,-48,]),'ARROW':([39,40,41,69,82,83,84,85,86,87,],[-20,-21,-22,-23,93,94,-24,-25,-26,-27,]),'FUN':([49,],[60,]),'START':([74,],[77,]),'ELSE':([77,81,84,85,86,87,90,94,97,99,100,101,107,111,],[84,84,-24,-25,-26,-27,84,84,84,-28,-30,-29,84,84,]),'DEADEND':([77,81,84,85,86,87,90,94,97,99,100,101,107,111,],[85,85,-24,-25,-26,-27,85,85,85,-28,-30,-29,85,85,]),'ALPHABET':([77,81,84,85,86,87,90,94,97,99,100,101,107,111,],[86,86,-24,-25,-26,-27,86,86,86,-28,-30,-29,86,86,]),'ITSELF':([77,81,84,85,86,87,90,94,97,99,100,101,107,111,],[87,87,-24,-25,-26,-27,87,87,87,-28,-30,-29,87,87,]),'TERMINAL':([80,81,84,85,86,87,89,91,92,98,99,100,101,104,],[-6,-34,-24,-25,-26,-27,96,-37,-33,-36,-28,-30,-29,-35,]),'RETURN':([102,],[105,]),'LOGICOPERATOR':([115,116,119,123,128,129,],[121,-50,121,-51,-49,-52,]),'COMPAREOPERATOR':([118,],[122,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programscope':([0,],[1,]),'expressions':([0,4,],[2,10,]),'empty':([0,82,105,],[3,93,110,]),'expression':([0,4,],[4,4,]),'classdef':([0,4,],[5,5,]),'automaton':([0,4,],[6,6,]),'alphabet':([0,4,],[7,7,]),'fields':([13,20,75,],[15,24,77,]),'field':([13,20,75,],[16,16,16,]),'enumeration':([27,44,45,46,48,52,67,],[33,54,57,58,59,63,57,]),'term':([27,44,45,46,48,52,67,],[34,34,34,34,34,34,34,]),'transitionterm':([29,79,83,92,99,109,113,],[40,84,84,84,84,84,84,]),'classbody':([38,50,],[49,61,]),'method':([38,50,],[50,50,]),'alphabetdescribebody':([45,67,],[55,73,]),'paramsdescribe':([45,67,],[56,56,]),'automatondescribebody':([76,],[78,]),'statedescription':([79,83,92,99,109,113,],[82,94,100,106,114,119,]),'transition':([79,83,92,99,109,113,],[83,83,83,83,83,83,]),'transitionkeyword':([79,83,92,96,99,109,113,],[85,85,85,102,85,85,85,]),'states':([82,],[91,]),'termstates':([105,],[108,]),'logicoperations':([111,116,],[117,121,]),'compareoperation':([111,116,127,],[118,118,129,]),}
+_lr_goto_items = {'expressions':([0,2,],[1,8,]),'expression':([0,2,],[2,2,]),'classdef':([0,2,],[3,3,]),'automaton':([0,2,],[4,4,]),'alphabet':([0,2,],[5,5,]),'fields':([11,18,73,],[13,22,75,]),'field':([11,18,73,],[14,14,14,]),'enumeration':([25,42,43,44,46,50,65,],[31,52,55,56,57,61,55,]),'term':([25,42,43,44,46,50,65,],[32,32,32,32,32,32,32,]),'transitionterm':([27,77,81,90,97,107,111,],[38,82,82,82,82,82,82,]),'classbody':([36,48,],[47,59,]),'method':([36,48,],[48,48,]),'alphabetdescribebody':([43,65,],[53,71,]),'paramsdescribe':([43,65,],[54,54,]),'automatondescribebody':([74,],[76,]),'statedescription':([77,81,90,97,107,111,],[80,92,98,104,112,117,]),'transition':([77,81,90,97,107,111,],[81,81,81,81,81,81,]),'transitionkeyword':([77,81,90,94,97,107,111,],[83,83,83,100,83,83,83,]),'states':([80,],[89,]),'empty':([80,103,],[91,108,]),'termstates':([103,],[106,]),'logicoperations':([109,114,],[115,119,]),'compareoperation':([109,114,125,],[116,116,127,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,59 +26,57 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> programscope","S'",1,None,None,None),
-  ('alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND','alphabet',8,'p_alphabet','parse.py',260),
-  ('alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND','alphabet',10,'p_alphabet','parse.py',261),
-  ('alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND','alphabet',10,'p_alphabet','parse.py',262),
-  ('enumeration -> term','enumeration',1,'p_enumeration','parse.py',280),
-  ('enumeration -> term COMMA enumeration','enumeration',3,'p_enumeration','parse.py',281),
-  ('term -> CHAR','term',1,'p_term','parse.py',293),
-  ('term -> INT','term',1,'p_term','parse.py',294),
-  ('term -> STRING','term',1,'p_term','parse.py',295),
-  ('term -> ID','term',1,'p_term','parse.py',296),
-  ('term -> CLASSNAME PARSTART enumeration PAREND','term',4,'p_term','parse.py',297),
-  ('alphabetdescribebody -> paramsdescribe','alphabetdescribebody',1,'p_alphabetdescribebody','parse.py',309),
-  ('alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody','alphabetdescribebody',3,'p_alphabetdescribebody','parse.py',310),
-  ('paramsdescribe -> enumeration FROM ID','paramsdescribe',3,'p_paramsdescribe','parse.py',322),
-  ('transitionterm -> CHAR','transitionterm',1,'p_transitionterm','parse.py',327),
-  ('transitionterm -> INT','transitionterm',1,'p_transitionterm','parse.py',328),
-  ('transitionterm -> STRING','transitionterm',1,'p_transitionterm','parse.py',329),
-  ('transitionterm -> CLASSNAME PARSTART enumeration PAREND','transitionterm',4,'p_transitionterm','parse.py',330),
-  ('transitionkeyword -> ELSE','transitionkeyword',1,'p_transitionkeyword','parse.py',342),
-  ('transitionkeyword -> DEADEND','transitionkeyword',1,'p_transitionkeyword','parse.py',343),
-  ('transitionkeyword -> ALPHABET','transitionkeyword',1,'p_transitionkeyword','parse.py',344),
-  ('transitionkeyword -> ITSELF','transitionkeyword',1,'p_transitionkeyword','parse.py',345),
-  ('transition -> transitionterm ARROW ID','transition',3,'p_transition','parse.py',351),
-  ('transition -> transitionkeyword ARROW ID','transition',3,'p_transition','parse.py',352),
-  ('transition -> transitionkeyword ARROW transitionkeyword','transition',3,'p_transition','parse.py',353),
-  ('automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND','automaton',14,'p_automaton','parse.py',359),
-  ('automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND','automatondescribebody',7,'p_automatondescribebody','parse.py',364),
-  ('statedescription -> transition statedescription','statedescription',2,'p_statedescription','parse.py',369),
-  ('statedescription -> transition','statedescription',1,'p_statedescription','parse.py',370),
-  ('states -> states ID statedescription','states',3,'p_states','parse.py',379),
-  ('states -> ID statedescription','states',2,'p_states','parse.py',380),
-  ('states -> empty','states',1,'p_states','parse.py',381),
-  ('termstates -> termstates ID statedescription','termstates',3,'p_termstates','parse.py',393),
-  ('termstates -> ID statedescription','termstates',2,'p_termstates','parse.py',394),
-  ('termstates -> empty','termstates',1,'p_termstates','parse.py',395),
-  ('classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND','classdef',10,'p_classdef','parse.py',407),
-  ('field -> ID TYPIZATION CLASSNAME','field',3,'p_field','parse.py',412),
-  ('field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm','field',5,'p_field','parse.py',413),
-  ('fields -> field','fields',1,'p_fields','parse.py',422),
-  ('fields -> field COMMA fields','fields',3,'p_fields','parse.py',423),
-  ('classbody -> method','classbody',1,'p_classbody','parse.py',428),
-  ('classbody -> method classbody','classbody',2,'p_classbody','parse.py',429),
-  ('method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND','method',14,'p_method','parse.py',438),
-  ('compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD','compareoperation',5,'p_compareoperation','parse.py',443),
-  ('logicoperations -> compareoperation','logicoperations',1,'p_logicoperations','parse.py',448),
-  ('logicoperations -> PARSTART logicoperations PAREND','logicoperations',3,'p_logicoperations','parse.py',449),
-  ('logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND','logicoperations',5,'p_logicoperations','parse.py',450),
-  ('programscope -> expressions','programscope',1,'p_programscope','parse.py',463),
-  ('programscope -> empty','programscope',1,'p_programscope','parse.py',464),
-  ('expressions -> expression','expressions',1,'p_expressions','parse.py',470),
-  ('expressions -> expression expressions','expressions',2,'p_expressions','parse.py',471),
-  ('expression -> classdef','expression',1,'p_expression','parse.py',480),
-  ('expression -> automaton','expression',1,'p_expression','parse.py',481),
-  ('expression -> alphabet','expression',1,'p_expression','parse.py',482),
-  ('empty -> <empty>','empty',0,'p_empty','parse.py',488),
+  ("S' -> expressions","S'",1,None,None,None),
+  ('expressions -> expression','expressions',1,'p_expressions','parse.py',258),
+  ('expressions -> expression expressions','expressions',2,'p_expressions','parse.py',259),
+  ('expression -> classdef','expression',1,'p_expression','parse.py',268),
+  ('expression -> automaton','expression',1,'p_expression','parse.py',269),
+  ('expression -> alphabet','expression',1,'p_expression','parse.py',270),
+  ('empty -> <empty>','empty',0,'p_empty','parse.py',276),
+  ('alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND','alphabet',8,'p_alphabet','parse.py',285),
+  ('alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND','alphabet',10,'p_alphabet','parse.py',286),
+  ('alphabet -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND','alphabet',10,'p_alphabet','parse.py',287),
+  ('enumeration -> term','enumeration',1,'p_enumeration','parse.py',301),
+  ('enumeration -> term COMMA enumeration','enumeration',3,'p_enumeration','parse.py',302),
+  ('term -> CHAR','term',1,'p_term','parse.py',312),
+  ('term -> INT','term',1,'p_term','parse.py',313),
+  ('term -> STRING','term',1,'p_term','parse.py',314),
+  ('term -> ID','term',1,'p_term','parse.py',315),
+  ('term -> CLASSNAME PARSTART enumeration PAREND','term',4,'p_term','parse.py',316),
+  ('alphabetdescribebody -> paramsdescribe','alphabetdescribebody',1,'p_alphabetdescribebody','parse.py',326),
+  ('alphabetdescribebody -> paramsdescribe COMMA alphabetdescribebody','alphabetdescribebody',3,'p_alphabetdescribebody','parse.py',327),
+  ('paramsdescribe -> enumeration FROM ID','paramsdescribe',3,'p_paramsdescribe','parse.py',337),
+  ('transitionterm -> CHAR','transitionterm',1,'p_transitionterm','parse.py',342),
+  ('transitionterm -> INT','transitionterm',1,'p_transitionterm','parse.py',343),
+  ('transitionterm -> STRING','transitionterm',1,'p_transitionterm','parse.py',344),
+  ('transitionterm -> CLASSNAME PARSTART enumeration PAREND','transitionterm',4,'p_transitionterm','parse.py',345),
+  ('transitionkeyword -> ELSE','transitionkeyword',1,'p_transitionkeyword','parse.py',355),
+  ('transitionkeyword -> DEADEND','transitionkeyword',1,'p_transitionkeyword','parse.py',356),
+  ('transitionkeyword -> ALPHABET','transitionkeyword',1,'p_transitionkeyword','parse.py',357),
+  ('transitionkeyword -> ITSELF','transitionkeyword',1,'p_transitionkeyword','parse.py',358),
+  ('transition -> transitionterm ARROW ID','transition',3,'p_transition','parse.py',364),
+  ('transition -> transitionkeyword ARROW ID','transition',3,'p_transition','parse.py',365),
+  ('transition -> transitionkeyword ARROW transitionkeyword','transition',3,'p_transition','parse.py',366),
+  ('automaton -> DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART ID PAREND METHOD BLOCKSTART automatondescribebody BLOCKEND','automaton',14,'p_automaton','parse.py',372),
+  ('automatondescribebody -> START statedescription states TERMINAL BLOCKSTART termstates BLOCKEND','automatondescribebody',7,'p_automatondescribebody','parse.py',377),
+  ('statedescription -> transition statedescription','statedescription',2,'p_statedescription','parse.py',382),
+  ('statedescription -> transition','statedescription',1,'p_statedescription','parse.py',383),
+  ('states -> states ID statedescription','states',3,'p_states','parse.py',392),
+  ('states -> ID statedescription','states',2,'p_states','parse.py',393),
+  ('states -> empty','states',1,'p_states','parse.py',394),
+  ('termstates -> termstates ID statedescription','termstates',3,'p_termstates','parse.py',406),
+  ('termstates -> ID statedescription','termstates',2,'p_termstates','parse.py',407),
+  ('termstates -> empty','termstates',1,'p_termstates','parse.py',408),
+  ('classdef -> CLASS CLASSNAME PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART classbody BLOCKEND','classdef',10,'p_classdef','parse.py',420),
+  ('field -> ID TYPIZATION CLASSNAME','field',3,'p_field','parse.py',425),
+  ('field -> ID TYPIZATION CLASSNAME EQUALITY transitionterm','field',5,'p_field','parse.py',426),
+  ('fields -> field','fields',1,'p_fields','parse.py',435),
+  ('fields -> field COMMA fields','fields',3,'p_fields','parse.py',436),
+  ('classbody -> method','classbody',1,'p_classbody','parse.py',441),
+  ('classbody -> method classbody','classbody',2,'p_classbody','parse.py',442),
+  ('method -> OVERRIDE FUN ID PARSTART fields PAREND TYPIZATION CLASSNAME BLOCKSTART RETURN PARSTART logicoperations PAREND BLOCKEND','method',14,'p_method','parse.py',451),
+  ('compareoperation -> ID METHOD COMPAREOPERATOR ID METHOD','compareoperation',5,'p_compareoperation','parse.py',456),
+  ('logicoperations -> compareoperation','logicoperations',1,'p_logicoperations','parse.py',461),
+  ('logicoperations -> PARSTART logicoperations PAREND','logicoperations',3,'p_logicoperations','parse.py',462),
+  ('logicoperations -> logicoperations LOGICOPERATOR PARSTART compareoperation PAREND','logicoperations',5,'p_logicoperations','parse.py',463),
 ]

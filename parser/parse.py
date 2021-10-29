@@ -1,6 +1,7 @@
 import enum
 import sys
 import ply.yacc as yacc
+import logging
 
 from lex import tokens
 
@@ -108,25 +109,23 @@ class AutomatonBody:
 
 
 class Alphabet:
-    def __init__(self, name, arg_type, constructor_type, constructor_params):
+    def __init__(self, name, constructor_type, constructor_params):
         self.name = name
-        self.arg_type = arg_type
         self.constructor_type = constructor_type
         self.constructor_params = constructor_params
 
-    def add_param(self, param):
-        self.constructor_params.append(param)
-
     def __repr__(self):
         params_str = ""
-        for par in self.constructor_params:
-            params_str += "\t\t"
-            params_str += par.show_with_tabs
+        if self.constructor_params is not None:
+            for par in self.constructor_params:
+                params_str += "\t\t"
+                params_str += par.__repr__()
+        else:
+            params_str = "no constructor parameters given"
 
         return str(
             "Alphabet:\n\tname: " +
-            self.name.__str__() + "\n\targ_type: " +
-            self.arg_type.__str__() + "\n\tconstructor_type: " +
+            self.name.__str__() + "\n\tconstructor_type: " +
             self.constructor_type.__str__() + "\n\tconstructor_params:\n" +
             params_str
         )
@@ -139,18 +138,6 @@ class Variable:
 
     def add_param(self, param):
         self.constructor_params.append(param)
-
-    def show_with_tabs(self):
-        params_str = ""
-        for par in self.constructor_params:
-            params_str += "\t\t"
-            params_str += par.__str__()
-
-        return str(
-            "Variable:\n\tvartype:" +
-            self.vartype.__str__() + "\n\tconstructor_params:\n" +
-            params_str
-        )
 
     def __repr__(self):
         params_str = ""
@@ -256,20 +243,47 @@ class CompareOperation:
         )
 
 
+def p_expressions(p):
+    '''expressions : expression
+                   | expression expressions'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        if len(p) == 3:
+            p[0] = p[2].insert(0, p[1])
+
+
+def p_expression(p):
+    '''expression : classdef
+                  | automaton
+                  | alphabet
+                  '''
+    p[0] = p[1]
+
+
+def p_empty(p):
+    'empty :'
+    p[0] = []
+
+
+def p_error(p):
+    print("Syntax error")
+
+
 def p_alphabet(p):
     '''alphabet : DEF ID TYPIZATION CLASSNAME EQUALITY BLOCKSTART enumeration BLOCKEND
                 | DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD PARSTART enumeration PAREND
                 | DEF ID TYPIZATION CLASSNAME EQUALITY CLASSNAME METHOD BLOCKSTART alphabetdescribebody BLOCKEND
                  '''
     if len(p) == 9:
-        p[0] = Alphabet(p[2], (p[3][8:])[:-1], ConstructorType.enumeration, p[7])
+        p[0] = Alphabet(p[2], ConstructorType.enumeration, p[7])
     else:
         if len(p) == 11:
-            if p[8].type == "PARSTART":
-                p[0] = Alphabet(p[2], (p[3][8:])[:-1], ConstructorType.strict, p[9])
+            if p[8] == "(":
+                p[0] = Alphabet(p[2], ConstructorType.strict, p[9])
             else:
-                if p[8].type == "BLOCKSTART":
-                    p[0] = Alphabet(p[2], (p[3][8:])[:-1], ConstructorType.describe, p[9])
+                if p[8] == "{":
+                    p[0] = Alphabet(p[2], ConstructorType.describe, p[9])
 
 
 def p_enumeration(p):
@@ -279,8 +293,8 @@ def p_enumeration(p):
     if len(p) == 2:
         p[0] = [p[1]]
     else:
-        if len(p) == 4:
-            p[0] = [p[1]].append(p[2])
+        p[0] = [p[1]] + p[3]
+    # print(p[0])
 
 
 def p_term(p):
@@ -362,6 +376,7 @@ def p_statedescription(p):
     else:
         if len(p) == 2:
             p[0] = [p[1]]
+
 
 def p_states(p):
     '''states : states ID statedescription
@@ -447,42 +462,19 @@ def p_logicoperations(p):
                 p[0] = p[1].append([p[2], p[3], p[4], p[5]])
 
 
-def p_programscope(p):
-    '''programscope : expressions
-                    | empty
-                    '''
-    p[0] = p[1]
+# Set up a logging object
+logging.basicConfig(
+    level=logging.DEBUG,
+    filename="parselog.txt",
+    filemode="w",
+    format="%(filename)10s:%(lineno)4d:%(message)s"
+)
+log = logging.getLogger()
 
+# lex.lex(debug=True, debuglog=log)
 
-def p_expressions(p):
-    '''expressions : expression
-                   | expression expressions'''
-    if len(p) == 2:
-        p[0] = [p[1]]
-    else:
-        if len(p) == 3:
-            p[0] = p[2].insert(0, p[1])
-
-
-def p_expression(p):
-    '''expression : classdef
-                  | automaton
-                  | alphabet
-                  '''
-    p[0] = p[1]
-
-
-def p_empty(p):
-    'empty :'
-    p[0] = None
-
-
-def p_error(p):
-    print("Syntax error")
-
-
-start = 'programscope'
-parser = yacc.yacc()
+start = 'expressions'
+parser = yacc.yacc(debug=True, debuglog=log)
 
 sys.stdin = open(sys.argv[1], 'r')
 sys.stdout = open(sys.argv[1] + '.out', 'w')
@@ -494,9 +486,9 @@ while True:
         break
     if not s:
         continue
-    try:
-        result = parser.parse(s)
-        print(result.__str__())
-    except Exception as e:
-        print("Error: " + str(e))
-        break
+    # try:
+    result = parser.parse(s)
+    print(result.__str__())
+    # except Exception as e:
+    #     print("Error: " + str(e))
+    break

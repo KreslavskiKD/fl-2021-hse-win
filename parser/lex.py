@@ -1,5 +1,6 @@
 import ply.lex as lex
 import sys
+import logging
 
 reserved = {
     'def': 'DEF',
@@ -110,7 +111,16 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-lexer = lex.lex()
+# Set up a logging object
+logging.basicConfig(
+    level=logging.DEBUG,
+    filename="parselog.txt",
+    filemode="w",
+    format="%(filename)10s:%(lineno)4d:%(message)s"
+)
+log = logging.getLogger()
+
+lexer = lex.lex(debug=True, debuglog=log)
 
 # f = open(sys.argv[1], "r")
 #

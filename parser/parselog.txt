@@ -1,0 +1,22 @@
+    lex.py: 924:lex: tokens   = ['INT', 'STRING', 'CHAR', 'ARROW', 'ID', 'CLASSNAME', 'TYPIZATION', 'BLOCKSTART', 'BLOCKEND', 'PARSTART', 'PAREND', 'EQUALITY', 'COMMA', 'METHOD', 'LOGICOPERATOR', 'COMPAREOPERATOR', 'DEF', 'CLASS', 'OVERRIDE', 'FUN', 'RETURN', 'START', 'ELSE', 'DEADEND', 'ALPHABET', 'TERMINAL', 'ITSELF', 'FROM']
+    lex.py: 925:lex: literals = ''
+    lex.py: 926:lex: states   = {'INITIAL': 'inclusive'}
+    lex.py: 953:lex: Adding rule t_INT -> '[0-9]+' (state 'INITIAL')
+    lex.py: 953:lex: Adding rule t_STRING -> '\"[a-z_0-9A-Z]*\"' (state 'INITIAL')
+    lex.py: 953:lex: Adding rule t_CHAR -> '\'.\'' (state 'INITIAL')
+    lex.py: 953:lex: Adding rule t_ID -> '[a-z_][a-z_0-9A-Z]*' (state 'INITIAL')
+    lex.py: 953:lex: Adding rule t_METHOD -> '\.[a-z_0-9A-Z]*' (state 'INITIAL')
+    lex.py: 953:lex: Adding rule t_CLASSNAME -> '[A-Z][a-z_0-9A-Z]*(<[A-Z][a-z_0-9A-Z]*>)?' (state 'INITIAL')
+    lex.py: 953:lex: Adding rule t_newline -> '\n+' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_COMPAREOPERATOR -> '==|<=|>=|>|<|!=' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_LOGICOPERATOR -> '\|\||&&' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_ARROW -> '\->' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_BLOCKSTART -> '\{' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_BLOCKEND -> '\}' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_PARSTART -> '\(' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_PAREND -> '\)' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_TYPIZATION -> ':' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_EQUALITY -> '=' (state 'INITIAL')
+    lex.py: 959:lex: Adding rule t_COMMA -> ',' (state 'INITIAL')
+    lex.py: 966:lex: ==== MASTER REGEXS FOLLOW ====
+    lex.py: 975:lex: state 'INITIAL' : regex[0] = '(?P<t_INT>[0-9]+)|(?P<t_STRING>\"[a-z_0-9A-Z]*\")|(?P<t_CHAR>\'.\')|(?P<t_ID>[a-z_][a-z_0-9A-Z]*)|(?P<t_METHOD>\.[a-z_0-9A-Z]*)|(?P<t_CLASSNAME>[A-Z][a-z_0-9A-Z]*(<[A-Z][a-z_0-9A-Z]*>)?)|(?P<t_newline>\n+)|(?P<t_COMPAREOPERATOR>==|<=|>=|>|<|!=)|(?P<t_LOGICOPERATOR>\|\||&&)|(?P<t_ARROW>\->)|(?P<t_BLOCKSTART>\{)|(?P<t_BLOCKEND>\})|(?P<t_PARSTART>\()|(?P<t_PAREND>\))|(?P<t_TYPIZATION>:)|(?P<t_EQUALITY>=)|(?P<t_COMMA>,)'
